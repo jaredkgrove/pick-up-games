@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration[5.2]
       t.string :time
       t.string :skill_level
       t.integer :admin_id
-      t.integre :court_id
+      t.integer :court_id
 
       t.timestamps
     end
