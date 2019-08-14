@@ -28,4 +28,12 @@ class Player < ApplicationRecord
     def remove_favorite(court)
         self.favorites.find_or_create_by(court:court).destroy
     end
+
+    def is_admin_of?(game_or_squad)
+        if game_or_squad.class == Game
+            GamePlayer.find_by(player:self, game: game_or_squad).admin
+        elsif game_or_squad.class == Squad
+            SquadPlayer.find_by(player:self, squad: game_or_squad).admin
+        end
+    end
 end

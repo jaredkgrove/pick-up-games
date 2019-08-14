@@ -10,21 +10,23 @@ class Squad < ApplicationRecord
     end
 
     def add_player_as_admin(player)
-        self.squad_players.create(player:player)
+        self.squad_players.find_or_create_by(player:player)
         make_admin(player)
     end
 
     def add_player(player)
-        self.squad_players.create(player:player)
+        self.squad_players.find_or_create_by(player:player)
+    end
+
+    def remove_player(player)
+        self.squad_players.find_by(player:player).destroy
     end
 
     def make_admin(player)
-        self.squad_players.find_by(player_id: player.id).update(admin: true)        
+        self.squad_players.find_by(player: player).update(admin: true)        
     end
 
     def remove_admin(player)
-        self.squad_players.find_by(player_id: player.id).update(admin: false)
+        self.squad_players.find_by(player: player).update(admin: false)
     end
 end
-#SELECT  "players".* FROM "players" INNER JOIN "squad_players" ON "players"."id" = "squad_players"."player_id" WHERE "squad_players"."squad_id" = ? LIMIT ?  
-#[["squad_id", 1], ["LIMIT", 11]]
