@@ -5,6 +5,10 @@ class Game < ApplicationRecord
     validates :time, presence: true
     validates :court, presence: true
 
+    def player_count
+        self.players.count
+    end
+
     def has_admin?
         !admins.empty?
     end

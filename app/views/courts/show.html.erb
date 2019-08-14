@@ -1,0 +1,8 @@
+<h1><%= @court.name %></h1>
+<h3>Address: <%= @court.location %></h3>
+
+<div class="games_list">
+    <% @court.games.each do |game|%>
+        <%= link_to "#{game.time} (#{game.player_count})", path %>
+    <% end %>
+</div>

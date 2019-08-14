@@ -7,6 +7,7 @@ class Squad < ApplicationRecord
     def player_count
         self.players.count
     end
+    
     def has_admin?
         !admins.empty?
     end

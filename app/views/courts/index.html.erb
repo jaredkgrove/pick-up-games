@@ -1,5 +1,8 @@
 <h1>Courts</h1>
 
 <% @courts.each do |court| %>
-    <%= link_to court.location, court_path(court) %> <br>
+    <div class="park">
+        <%= link_to court.name, court_path(court) %>
+        Address: <%= court.location %>
+    </div>
 <% end %>
