@@ -6,6 +6,7 @@ class Player < ApplicationRecord
     has_many :favorites
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
+    validate :name, presence: true
 
     def join_game(game)
         game.add_player(self)
@@ -17,7 +18,7 @@ class Player < ApplicationRecord
     end
 
     def create_squad(name)
-        new_squad = self.squads.create(name:name)
+        new_squad = self.squads.create(name: name)
         new_squad.make_admin(self)
     end
 
