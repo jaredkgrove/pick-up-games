@@ -1,13 +1,14 @@
 class Player < ApplicationRecord
+    has_secure_password
     has_many :squad_players
-    has_many :squads, through: :squad_players
+    has_many :squads, through: :squad_players, dependent: :destroy
     has_many :game_players
-    has_many :games, through: :game_players
+    has_many :games, through: :game_players, dependent: :destroy
     has_many :favorites
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
-    validate :name, presence: true
-    validate :name, uniqueness: true
+    validates :name, presence: true
+    validates :name, uniqueness: true
 
     def join_game(game)
         game.add_player(self)

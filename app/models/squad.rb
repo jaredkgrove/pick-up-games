@@ -1,6 +1,6 @@
 class Squad < ApplicationRecord
     has_many :squad_players
-    has_many :players, through: :squad_players
+    has_many :players, through: :squad_players, dependent: :destroy
     validates :name, presence: true
     #has_many :admins, class_name: :player, through: :squad_players
 
@@ -9,11 +9,9 @@ class Squad < ApplicationRecord
     end
 
     def admins
-        self.squad_players.where(admin: true).collect do |squad_player|
-            Player.find(squad_player.player_id)
-        end
+        self.players.joins(:squad_players).where(squad_players: {admin: true})
     end
-
+#SquadPlayer.joins(:player).where(admin: true)
     def add_player_as_admin(player)
         self.squad_players.find_or_create_by(player:player)
         make_admin(player)
@@ -25,7 +23,7 @@ class Squad < ApplicationRecord
 
     def remove_player(player)
         self.squad_players.find_by(player:player).destroy
-        delete_team if self.players.empty?
+        self.delete_team if self.players.empty?
     end
 
     def make_admin(player)
@@ -34,7 +32,7 @@ class Squad < ApplicationRecord
 
     def remove_admin(player)
         self.squad_players.find_by(player: player).update(admin: false)
-        make_all_admin if !has_admin?
+        self.make_all_admin if !self.has_admin?
     end
 
     def make_all_admin
