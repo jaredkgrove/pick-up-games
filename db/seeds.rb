@@ -5,3 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+10.times do |i|
+    Court.create(location:"Location #{i}")
+end
+player_names = ["Jared", "Michael Jordan", "Timmy", "Steph Curry", "John", "Maya Moore", "Candace Parker", "Bethany", "Chelsea Gray"]
+
+player_names.each do |name|
+    Player.create(name:name, password:"password")
+end
