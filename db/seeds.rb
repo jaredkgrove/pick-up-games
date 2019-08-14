@@ -11,5 +11,5 @@ end
 player_names = ["Jared", "Michael Jordan", "Timmy", "Steph Curry", "John", "Maya Moore", "Candace Parker", "Bethany", "Chelsea Gray"]
 
 player_names.each do |name|
-    Player.create(name:name, password:"password")
+    Player.create(name:name, password:"password", email:"#{name.gsub(/\s+/, "")}@email.com")
 end
