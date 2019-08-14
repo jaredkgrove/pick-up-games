@@ -7,6 +7,7 @@ class Player < ApplicationRecord
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
     validate :name, presence: true
+    validate :name, uniqueness: true
 
     def join_game(game)
         game.add_player(self)

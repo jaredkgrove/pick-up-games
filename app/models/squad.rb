@@ -33,7 +33,8 @@ class Squad < ApplicationRecord
     end
 
     def remove_admin(player)
-        self.squad_players.find_by(player: player).update(admin: false).valid?
+        self.squad_players.find_by(player: player).update(admin: false)
+        make_all_admin if !has_admin?
     end
 
     def make_all_admin
