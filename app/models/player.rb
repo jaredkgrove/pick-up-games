@@ -7,6 +7,10 @@ class Player < ApplicationRecord
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
 
+    def join_game(game)
+        game.add_player(self)
+    end
+
     def create_game(court, time)
         new_game = self.games.create(court: court, time: time)
         new_game.make_admin(self)

@@ -14,6 +14,10 @@ class Game < ApplicationRecord
         make_admin(player)
     end
 
+    def add_player(player)
+        self.game_players.create(player:player)
+    end
+
     def make_admin(player)
         self.game_players.find_by(player_id: player.id).update(admin: true)        
     end
