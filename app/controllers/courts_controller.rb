@@ -4,6 +4,6 @@ class CourtsController < ApplicationController
     end
 
     def show
-        @court = Court.find(:id)
+        @court = Court.find(params[:id])
     end
 end

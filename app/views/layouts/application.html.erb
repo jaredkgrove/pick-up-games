@@ -14,7 +14,10 @@
       <div class="container">
         <div class="navbar-header">
           <%= link_to "Home", root_url %>
+          <%= link_to 'Courts', courts_path %>
+          <%= link_to 'Squads', squads_path %>
           <% if current_player %>
+            <%= link_to 'My Profile', player_path(current_player) %>
             <%= link_to 'Log Out', logout_path, :method => :post %>
           <% else%>
             <%= link_to "Sign Up", new_player_url %>

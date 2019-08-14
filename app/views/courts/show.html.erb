@@ -3,6 +3,11 @@
 
 <div class="games_list">
     <% @court.games.each do |game|%>
-        <%= link_to "#{game.time} (#{game.player_count})", path %>
+        <%= link_to "#{game.time} (#{game.player_count})", court_game_path(@court, game) %> <br>
     <% end %>
 </div>
+<%= form_for :game, url: court_games_path(@court) do |f| %>
+    <%= f.hidden_field :court_id, value: @court.id %>
+    Time: <%= f.text_field :time %> <br>
+    <%= f.submit "Create Game" %>
+<% end %>

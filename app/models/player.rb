@@ -23,14 +23,16 @@ class Player < ApplicationRecord
         game.add_player(self)
     end
 
-    def create_game(court, time)
-        new_game = self.games.create(court: court, time: time)
+    def create_game_from_hash(game_hash)
+        new_game = self.games.create(game_hash)
         new_game.make_admin(self)
+        new_game
     end
 
     def create_squad(name)
         new_squad = self.squads.create(name: name)
         new_squad.make_admin(self)
+        new_squad
     end
 
     def add_favorite(court)
