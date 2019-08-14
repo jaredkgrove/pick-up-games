@@ -10,6 +10,23 @@
   </head>
 
   <body>
-    <%= yield %>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <%= link_to "Home", root_url %>
+          <% if current_player %>
+            <%= link_to 'Log Out', logout_path, :method => :post %>
+          <% else%>
+            <%= link_to "Sign Up", new_player_url %>
+            <%= link_to "Log In", login_url %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- content -->
+    <div class="container"  role="main">
+      <%= yield %>
+    </div>
   </body>
 </html>

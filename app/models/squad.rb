@@ -4,6 +4,9 @@ class Squad < ApplicationRecord
     validates :name, presence: true
     #has_many :admins, class_name: :player, through: :squad_players
 
+    def player_count
+        self.players.count
+    end
     def has_admin?
         !admins.empty?
     end

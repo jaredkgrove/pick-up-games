@@ -1,0 +1,7 @@
+<h1>Join a Squad or create your own!</h1>
+
+<%= render "form", squad: @new_squad %>
+
+<% @squads.each do |squad| %>
+    <%= link_to "#{squad.name} (#{squad.player_count} members)", squad_path(squad) %> <br>
+<% end %>
