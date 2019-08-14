@@ -2,6 +2,7 @@ class Game < ApplicationRecord
     belongs_to :court
     has_many :game_players
     has_many :players, through: :game_players, dependent: :destroy
+    has_many :admins, -> { merge(GamePlayer.admin) }, :source => :player, :through => :game_players
     validates :time, presence: true
     validates :court, presence: true
 
@@ -11,10 +12,6 @@ class Game < ApplicationRecord
 
     def has_admin?
         !admins.empty?
-    end
-
-    def admins
-        self.players.joins(:squad_players).where(squad_players: {admin: true})
     end
 
     def add_player_as_admin(player)
