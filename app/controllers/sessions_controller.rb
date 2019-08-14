@@ -4,7 +4,9 @@ class SessionsController < ApplicationController
 
     def create
         if auth_hash = request.env["omniauth.auth"]
-            raise auth_hash.inspect
+            @player = Player.find_or_create_by_omniauth_hash(auth_hash)
+            session[:player_id] = @player.id
+            redirect_to root_path
         else
             @player = Player.find_by(email: params[:player][:email])
             if @player && @player.authenticate(params[:player][:password])

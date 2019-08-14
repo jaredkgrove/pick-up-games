@@ -12,6 +12,13 @@ class Player < ApplicationRecord
     validates :email, uniqueness: true
     validates :password, presence: true
 
+    def self.find_or_create_by_omniauth_hash(auth_hash)
+        self.where(email: auth_hash[:info][:email]).first_or_create do |player|
+            player.name = auth_hash[:info][:name] if !player.name
+            player.password = SecureRandom.hex
+        end
+    end
+
     def join_game(game)
         game.add_player(self)
     end
