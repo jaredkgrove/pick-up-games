@@ -4,15 +4,15 @@ class PlayersController < ApplicationController
     end
 
     def new
-
+        @player = Player.new
     end
 
     def create
-        player = Player.new(player_params) 
-        if !player.valid? || params[:player][:password] != params[:player][:password_confirmation]
+        @player = Player.new(player_params) 
+        if !@player.valid? || params[:player][:password] != params[:player][:password_confirmation]
             render :new
         else
-            player.save
+            @player.save
             session[:player_id] = player.id
             redirect_to root_path
         end
