@@ -6,4 +6,8 @@ module GamesHelper
     def display_time(time)
         time.strftime("%A, %B %d at %l:%m%P")
     end
+
+    def player_admin_button(game, text, params_hash)
+        button_to text, court_game_path(game.court, game), :method => :patch, :params => params_hash
+    end
 end

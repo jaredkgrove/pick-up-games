@@ -4,5 +4,6 @@
     <div class="park">
         <%= link_to court.name, court_path(court) %>
         Address: <%= court.location %>
+        Upcoming Games: <%= court.upcoming_games.count %>
     </div>
 <% end %>

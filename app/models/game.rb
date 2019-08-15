@@ -19,7 +19,7 @@ class Game < ApplicationRecord
     end 
 
     def is_in_game?(player)
-        self.players.find(player.id)
+        self.players.find_by(id: player.id)
     end
 
     def player_count
@@ -40,7 +40,7 @@ class Game < ApplicationRecord
     end
 
     def add_or_remove_player(player)
-        game_player = self.squad_players.find_by(player:player)
+        game_player = self.game_players.find_by(player:player)
         if game_player
             game_player.destroy
         else

@@ -4,11 +4,25 @@
 
 <h3>Players</h3>
 <% @game.players.each do |player|%>
-    <%= link_to player.name, player_path(player) %>
+    <div style="float: left; width: auto;"> 
+        <%= link_to player.name, player_path(player) %>
+        <%= " - ADMIN " if player.is_admin_of?(@game) %>
+    </div>
+        <% if current_player.is_admin_of?(@game) && player != current_player %>
+            <div style="float: left; width: auto;"> 
+            <%=  player_admin_button(@game, "Remove Player", {player_id: player.id}) %>
+            </div>
+           <%=  player_admin_button(@game, "Add Admin", {admin_id: player.id}) %>
+            <%# render partial: 'player_admin_button', locals: {game: @game, action_text: "Remove Player", action_hash: {player_id: player.id}} %>
+            <%# render partial: 'add_remove_player', locals: {game: @game, action_text: "Remove Player", action_hash: {player_id: player.id}} %>
+        <% else %>
+            <br>
+        <% end %>
 <% end %>
 
 <% if current_player%>
-    <%= form_tag(court_game_path, method: :patch) do%>
-        <%= submit_tag (@game.is_in_game?(current_player) ? "Leave Game" : "Join Game") %>
-    <% end%>
+    <br>
+    <%= player_admin_button(@game, @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", {player_id: current_player.id}) %>
+
+    <%# render partial: 'add_remove_player', locals: {game: @game, action_text: @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", action_hash: {player_id: current_player.id}} %>
 <% end %>

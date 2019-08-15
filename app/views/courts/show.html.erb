@@ -1,17 +1,19 @@
 <h1><%= @court.name %></h1>
 <h3>Address: <%= @court.location %></h3>
 
+<h3>Upcoming Games</h3>
 <div class="games_list">
-    <% @court.games.each do |game|%>
+    <% @court.upcoming_games.each do |game|%>
         <%= link_to "#{game.time} (#{game.player_count})", court_game_path(@court, game) %> <br>
     <% end %>
 </div>
 
 <% if current_player %>
+    <h3>Create New Game</h3>
     <%= form_tag(court_games_path(@court)) do%>
         <%= hidden_field_tag "game[court_id]", @court.id %>
         Skill Level: <%= select_tag "game[skill_level]", options_for_select(Game.skill_level_array, Game.skill_level_array.first) %> <br>
-        Time: <%= datetime_field_tag "game[time]", current_time_for_form_tag %>
+        Time: <%= datetime_field_tag "game[time]", current_time_for_form_tag %> <br>
 
         <%= submit_tag "Create Game" %>
     <% end%>

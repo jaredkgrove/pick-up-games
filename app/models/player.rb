@@ -12,6 +12,10 @@ class Player < ApplicationRecord
     validates :email, uniqueness: true
     validates :password, presence: true
 
+    def upcoming_games
+        self.games.where("time > ?", Time.zone.now).order(time: "ASC")
+    end
+
     def self.find_or_create_by_omniauth_hash(auth_hash)
         self.where(email: auth_hash[:info][:email]).first_or_create do |player|
             player.name = auth_hash[:info][:name] if !player.name
@@ -44,10 +48,6 @@ class Player < ApplicationRecord
     end
 
     def is_admin_of?(game_or_squad)
-        if game_or_squad.class == Game
-            GamePlayer.find_by(player:self, game: game_or_squad).admin
-        elsif game_or_squad.class == Squad
-            SquadPlayer.find_by(player:self, squad: game_or_squad).admin
-        end
+        game_or_squad.admins.find_by(id: self.id)
     end
 end

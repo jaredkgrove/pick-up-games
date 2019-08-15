@@ -19,9 +19,17 @@ class GamesController < ApplicationController
     def update
         game = Game.find(params[:id])
         if current_player.is_admin_of?(game)
-            game.add_or_remove_player(current_player)
+            
+            if params[:player_id]
+                player = Player.find(params[:player_id])
+                game.add_or_remove_player(player)
+            else
+                
+            end
+                redirect_to court_game_path(game.court, game)
         else
             game.add_or_remove_player(current_player)
+            redirect_to court_game_path(game.court, game)
         end
     end
 
