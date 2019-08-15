@@ -5,9 +5,13 @@ class GamesController < ApplicationController
 
     def create
         redirect_if_not_logged_in
-        #raise params.inspect
+        raise params.inspect
         game = current_player.create_game_from_hash(game_params)
-        redirect_to court_game_path(game.court, game)
+        if game.valid?
+            redirect_to court_game_path(game.court, game)
+        else
+            render courts_path(game.court)
+        end
     end
 
     private

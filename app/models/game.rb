@@ -5,6 +5,13 @@ class Game < ApplicationRecord
     has_many :admins, -> { merge(GamePlayer.admin) }, :source => :player, :through => :game_players
     validates :time, presence: true
     validates :court, presence: true
+    validate :game_time_cannot_be_in_the_past
+
+    def game_time_cannot_be_in_the_past
+      if time.present? && time < Time.now
+        errors.add(:time, "can't be in the past")
+      end
+    end 
 
     def player_count
         self.players.count

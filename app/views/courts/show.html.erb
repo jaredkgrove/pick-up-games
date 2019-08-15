@@ -6,8 +6,20 @@
         <%= link_to "#{game.time} (#{game.player_count})", court_game_path(@court, game) %> <br>
     <% end %>
 </div>
-<%= form_for :game, url: court_games_path(@court) do |f| %>
-    <%= f.hidden_field :court_id, value: @court.id %>
-    Time: <%= f.text_field :time %> <br>
-    <%= f.submit "Create Game" %>
-<% end %>
+
+<%= form_tag(court_games_path(@court)) do%>
+    <%= hidden_field_tag :court_id, @court.id %>
+    Skill Level:<%= text_field_tag "skill_level" %> <br>
+    <%= datetime_field_tag "time" %>
+    <%= submit_tag "Create Game" %>
+<% end%>
+
+<%# form_for :game, url: court_games_path(@court) do |f| %>
+    <%# f.hidden_field :court_id, value: @court.id %>
+    <%# f.text_field :skill_level %>
+    <%# fields_for :time do |time_fields| %>
+         <%# time_fields.datetime_select :time%>
+    <%# end%>
+
+    <%# f.submit "Create Game" %>
+<%# end %>

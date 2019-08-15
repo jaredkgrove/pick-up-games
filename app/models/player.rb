@@ -24,9 +24,9 @@ class Player < ApplicationRecord
     end
 
     def create_game_from_hash(game_hash)
-        new_game = self.games.create(game_hash)
-        new_game.make_admin(self)
-        new_game
+        self.games.new(game_hash).tap do |game|
+            game.make_admin(self) if game.save
+        end
     end
 
     def create_squad(name)
