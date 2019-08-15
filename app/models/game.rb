@@ -5,10 +5,15 @@ class Game < ApplicationRecord
     has_many :admins, -> { merge(GamePlayer.admin) }, :source => :player, :through => :game_players
     validates :time, presence: true
     validates :court, presence: true
+    validates :skill_level, inclusion: { in: ["Everyone Welcome", "Weekend Hustlers", "Offseason Reps", "Run the Court (Girls)", "Still Got It"] }
     validate :game_time_cannot_be_in_the_past
 
+    def self.skill_level_array
+        ["Everyone Welcome", "Weekend Hustlers", "Offseason Reps", "Run the Court (Girls)", "Still Got It"]
+    end
+
     def game_time_cannot_be_in_the_past
-      if time.present? && time < Time.now
+      if time.present? && time < Time.zone.now
         errors.add(:time, "can't be in the past")
       end
     end 
@@ -26,7 +31,7 @@ class Game < ApplicationRecord
         make_admin(player)
     end
 
-    def add_player(player)
+    def add_or_remove_player(player)
         self.game_players.find_or_create_by(player:player)
     end
 

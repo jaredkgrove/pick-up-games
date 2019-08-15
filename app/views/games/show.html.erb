@@ -1,7 +1,15 @@
 <h1><%= @game.court.name %></h1>
-<h3><%= @game.time %></h3>
+<h3>Skill Level: <%= @game.skill_level %></h3>
+<h3><%= display_time(@game.time) %></h3>
 
+<h3>Players</h3>
 <% @game.players.each do |player|%>
     <%= link_to player.name, player_path(player) %>
 <% end %>
 
+<% if current_player%>
+    <%= form_tag(court_games_path(@court)) do%>
+        Time: <%= datetime_field_tag "game[time]", current_time_for_form_tag %>
+        <%= submit_tag "Create Game" %>
+    <% end%>
+<% end %>

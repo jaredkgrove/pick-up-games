@@ -7,12 +7,15 @@
     <% end %>
 </div>
 
-<%= form_tag(court_games_path(@court)) do%>
-    <%= hidden_field_tag :court_id, @court.id %>
-    Skill Level:<%= text_field_tag "skill_level" %> <br>
-    <%= datetime_field_tag "time" %>
-    <%= submit_tag "Create Game" %>
-<% end%>
+<% if current_player %>
+    <%= form_tag(court_games_path(@court)) do%>
+        <%= hidden_field_tag "game[court_id]", @court.id %>
+        Skill Level: <%= select_tag "game[skill_level]", options_for_select(Game.skill_level_array, Game.skill_level_array.first) %> <br>
+        Time: <%= datetime_field_tag "game[time]", current_time_for_form_tag %>
+
+        <%= submit_tag "Create Game" %>
+    <% end%>
+<% end %>
 
 <%# form_for :game, url: court_games_path(@court) do |f| %>
     <%# f.hidden_field :court_id, value: @court.id %>
