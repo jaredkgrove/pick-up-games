@@ -13,14 +13,18 @@ class Squad < ApplicationRecord
     end
 
     def add_player_as_admin(player)
-        self.squad_players.find_or_create_by(player:player)
+        find_or_add_player(player)
         make_admin(player)
     end
 
+    def find_or_add_player(player)
+        self.squad_players.find_or_create_by(player:player)
+    end
+
     def add_or_remove_player(player)
-        game_player = self.squad_players.find_by(player:player)
-        if game_player
-            game_player.destroy
+        squad_player = self.squad_players.find_by(player:player)
+        if squad_player
+            squad_player.destroy
             self.delete_team if self.players.empty?
         else
             self.squad_players.create(player: player)

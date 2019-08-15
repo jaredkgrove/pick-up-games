@@ -18,6 +18,10 @@ class Game < ApplicationRecord
       end
     end 
 
+    def is_in_game?(player)
+        self.players.find(player.id)
+    end
+
     def player_count
         self.players.count
     end
@@ -27,12 +31,21 @@ class Game < ApplicationRecord
     end
 
     def add_player_as_admin(player)
-        self.game_players.find_or_create_by(player:player)
+        self.add_player(player)
         make_admin(player)
     end
 
-    def add_or_remove_player(player)
+    def add_player(player)
         self.game_players.find_or_create_by(player:player)
+    end
+
+    def add_or_remove_player(player)
+        game_player = self.squad_players.find_by(player:player)
+        if game_player
+            game_player.destroy
+        else
+            self.player_count == 0 ? self.add_player_as_admin(player) : self.add_player(player)
+        end
     end
 
     def make_admin(player)

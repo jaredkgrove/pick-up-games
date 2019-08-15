@@ -8,8 +8,7 @@
 <% end %>
 
 <% if current_player%>
-    <%= form_tag(court_games_path(@court)) do%>
-        Time: <%= datetime_field_tag "game[time]", current_time_for_form_tag %>
-        <%= submit_tag "Create Game" %>
+    <%= form_tag(court_game_path, method: :patch) do%>
+        <%= submit_tag (@game.is_in_game?(current_player) ? "Leave Game" : "Join Game") %>
     <% end%>
 <% end %>

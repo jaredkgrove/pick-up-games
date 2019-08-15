@@ -2,6 +2,7 @@ class GamesController < ApplicationController
     before_action :require_login
     def show
         @game = Game.find(params[:id])
+        redirect_to court_game_path(@game.court, @game) if params[:court_id] != @game.court.id.to_s
     end
 
     def create
@@ -18,9 +19,9 @@ class GamesController < ApplicationController
     def update
         game = Game.find(params[:id])
         if current_player.is_admin_of?(game)
-
+            game.add_or_remove_player(current_player)
         else
-            
+            game.add_or_remove_player(current_player)
         end
     end
 
