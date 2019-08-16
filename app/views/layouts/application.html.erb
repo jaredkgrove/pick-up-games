@@ -29,6 +29,13 @@
 
     <!-- content -->
     <div class="container"  role="main">
+
+        <% flash.each do |key, messages| %>
+          <% messages.each do |message|%>
+            <div class="alert alert-<%= key %>"><%= message %></div>
+          <% end %>
+        <% end %>
+        
       <%= yield %>
     </div>
   </body>

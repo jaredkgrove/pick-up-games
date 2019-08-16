@@ -17,6 +17,6 @@
 
     x join by squad if admin of squad, all players are added to game
 
-    Flash Messages for invalid game, squad, and player creation
+    - Flash Messages for invalid game, squad, and player creation
 
     Styling

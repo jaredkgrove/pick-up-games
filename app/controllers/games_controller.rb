@@ -8,11 +8,13 @@ class GamesController < ApplicationController
     end
 
     def create
-        game = current_player.create_game_from_hash(game_params)
-        @court = game.court
-        if game.valid?
-            redirect_to court_game_path(@court, game)
+        @game = current_player.create_game_from_hash(game_params)
+        @court = @game.court
+        if @game.valid?
+            set_flash_succes("Game Successfully Created!")
+            redirect_to court_game_path(@court, @game)
         else
+            set_flash_errors(@game)
             render "courts/show"
         end
     end

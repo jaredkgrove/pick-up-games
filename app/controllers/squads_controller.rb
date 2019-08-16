@@ -3,7 +3,7 @@ class SquadsController < ApplicationController
 
     def index
         @squads = Squad.all
-        @new_squad = Squad.new
+        @squad = Squad.new
     end
 
     def show
@@ -11,10 +11,13 @@ class SquadsController < ApplicationController
     end
 
     def create
-        squad = current_player.create_squad_from_hash(squad_params)
-        if squad.save
-            redirect_to squad_path(squad)
+        @squad = current_player.create_squad_from_hash(squad_params)
+        if @squad.save
+            set_flash_succes("Squad Successfully Created!")
+            redirect_to squad_path(@squad)
         else
+            @squads = Squad.all
+            set_flash_errors(@squad)
             render :index
         end
     end

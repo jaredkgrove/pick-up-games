@@ -1,5 +1,6 @@
 <%= form_for @player, url: '/players' do |f| %>
   Email: <%= f.text_field :email %> <br>
+  Player Name: <%= f.text_field :name %> <br>
   Password: <%= f.password_field :password %> <br>
   Password Confirmation: <%= f.password_field :password_confirmation %> <br>
   <%= f.submit "Submit" %> <br>

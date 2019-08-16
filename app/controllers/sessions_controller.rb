@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
                 session[:player_id] = @player.id
                 redirect_to root_path
             else
+                flash.now[:errors] = ["Incorrect Email or Password"]
                 render :new
             end
         end
