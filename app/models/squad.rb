@@ -3,6 +3,7 @@ class Squad < ApplicationRecord
     has_many :players, through: :squad_players
     has_many :admins, -> { merge(SquadPlayer.admin) }, :source => :player, :through => :squad_players
     validates :name, presence: true
+    validates :name, uniqueness: true
 
     def is_in_squad?(player)
         self.players.find_by(id: player.id)
