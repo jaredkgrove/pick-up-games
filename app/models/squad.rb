@@ -1,6 +1,6 @@
 class Squad < ApplicationRecord
-    has_many :squad_players
-    has_many :players, through: :squad_players, dependent: :destroy
+    has_many :squad_players, dependent: :destroy
+    has_many :players, through: :squad_players
     has_many :admins, -> { merge(SquadPlayer.admin) }, :source => :player, :through => :squad_players
     validates :name, presence: true
 

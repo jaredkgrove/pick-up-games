@@ -1,7 +1,7 @@
 class Game < ApplicationRecord
     belongs_to :court
-    has_many :game_players
-    has_many :players, through: :game_players, dependent: :destroy
+    has_many :game_players, dependent: :destroy
+    has_many :players, through: :game_players
     has_many :admins, -> { merge(GamePlayer.admin) }, :source => :player, :through => :game_players
     validates :time, presence: true
     validates :court, presence: true

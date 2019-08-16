@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :squads, only: [:index, :show, :new, :create, :update, :destroy]
 
-  resources :courts, only: [:index, :show] do
+  resources :courts, only: [:index, :show, :update] do
     resources :games, only: [:show, :new, :edit, :create, :update, :destroy]
   end
 

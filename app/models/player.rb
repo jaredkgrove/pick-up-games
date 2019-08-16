@@ -1,10 +1,10 @@
 class Player < ApplicationRecord
     has_secure_password
-    has_many :squad_players
-    has_many :squads, through: :squad_players, dependent: :destroy
-    has_many :game_players
-    has_many :games, through: :game_players, dependent: :destroy
-    has_many :favorites
+    has_many :squad_players, dependent: :destroy
+    has_many :squads, through: :squad_players
+    has_many :game_players, dependent: :destroy
+    has_many :games, through: :game_players
+    has_many :favorites, dependent: :destroy
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
     validates :name, presence: true
