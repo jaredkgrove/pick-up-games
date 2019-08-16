@@ -13,6 +13,7 @@
 <h3>Squads</h3>
     <% @player.squads.each do |squad|%>
         <p>
+            <strong><%= "Admin: " if @player.is_admin_of?(squad) %></strong>
             <%= link_to squad.name, squad_path(squad) %>
             (<%= squad.player_count %> players)
         </p>

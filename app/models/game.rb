@@ -35,8 +35,9 @@ class Game < ApplicationRecord
     end
 
     def add_squad_to_game(squad)
+        self.add_player_as_admin(current_player) if self.player_count == 0
         squad.players.each do |player|
-            
+            add_player(player)
         end
     end
 
