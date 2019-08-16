@@ -18,15 +18,19 @@ class GamesController < ApplicationController
     end
 
     def update
+        raise params.inspect
         game = Game.find(params[:id])
         if current_player.is_admin_of?(game)
             
             if params[:player_id]
                 player = Player.find(params[:player_id])
                 game.add_or_remove_player(player)
-            else
+            elsif params[:admin_id]
                 player = Player.find(params[:admin_id])
                 game.make_admin(player)
+            elsif params[:squad_id]
+               squad = Squad.find(params[:squad_id])
+               game.add_squad_to_game(squad) 
             end
                 redirect_to court_game_path(game.court, game)
         else

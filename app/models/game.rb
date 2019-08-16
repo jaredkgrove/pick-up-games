@@ -34,6 +34,12 @@ class Game < ApplicationRecord
         !admins.empty?
     end
 
+    def add_squad_to_game(squad)
+        squad.players.each do |player|
+            
+        end
+    end
+
     def add_player_as_admin(player)
         add_player(player)
         self.make_admin(player)

@@ -9,12 +9,11 @@
     X display today's games on welcome page
 
     x allow user to create squad
-    - allow user to join/leave squad
-    - admin functionality
+    x allow user to join/leave squad
+    x admin functionality
 
-    - display squads on user show page
-    - display favorited courts on Player show page
-    - edit bio on user show page
+    x display squads on user show page
+    x display favorited courts on Player show page
 
     - join by squad if admin of squad, all players are added to game
 

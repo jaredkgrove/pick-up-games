@@ -21,4 +21,15 @@
 <% if current_player%>
     <br>
     <%= player_admin_button(path: court_game_path(@game.court, @game), text: @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", params_hash: {player_id: current_player.id}) %>
+    
+    <%= form_for @game, :url => court_game_url(@game.court, @game), :method => "PATCH" do |f| %>
+        <%= f.collection_select :player_ids, current_player.admin_squads, :id, :name %>
+        <%= f.submit "Add Squad" %>
+    <% end %>
+
+    <%= form_tag(court_game_path(@game.court, @game), :method => "PATCH") do%>
+        Squad: <%= select_tag "squad_id", options_from_collection_for_select(current_player.admin_squads, :id, :name) %> <br>
+        <%= submit_tag "Add Squad to Game" %>
+    <% end%>
+
 <% end %>
