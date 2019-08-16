@@ -40,7 +40,7 @@ end
 
 Player.all.each do |player|
     court = Court.all.sample  
-    player.create_game_from_hash({court_id: court.id, time: rand(10.days).hours.from_now, skill_level: Game.skill_level_array.sample})
+    player.create_game_from_hash({court_id: court.id, time: rand(10.days).seconds.from_now, skill_level: Game.skill_level_array.sample})
 end
 
 Player.all.each do |player|
