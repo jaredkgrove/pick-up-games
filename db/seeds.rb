@@ -31,7 +31,7 @@ courts_array.each do |court_hash|
     Court.create(location:court_hash[:location], name: court_hash[:name])
 end
 
-player_names = ["Jared", "Michael Jordan", "Timmy", "Steph Curry", "John", "Maya Moore", "Candace Parker", "Bethany", "Chelsea Gray"]
+player_names = ["Jared", "Michael Jordan", "Timmy", "Steph Curry", "John", "Maya Moore", "Candace Parker", "Bethany", "Chelsea Gray", "Cool Guy", "Tom", "Bill", "Saundra", "DeeAnn", "Jimnothy", "My real name", "Trevor002", "Tuff_guy10", "Petra", "Ball hog"]
 
 player_names.each do |name|
     player = Player.create(name:name, password:"password", email:"#{name.gsub(/\s+/, "")}@email.com")
@@ -47,5 +47,19 @@ Player.all.each do |player|
     rand(1..5).times do
         game = Game.all.sample
         game.add_or_remove_player(player) if !player.is_admin_of?(game)
+    end
+end
+
+squad_names_array = ["Squad", "Team", "boys", "girls", "troop", "posse", "battalion"]
+adjectives_array =["cool", "bad", "old", "awesome", "neat-o", "purple", "cheating", "over-enthusiastic"]
+
+Player.all.each do |player| 
+    player.create_squad_from_hash({name: "#{adjectives_array.sample} #{squad_names_array.sample}"})
+end
+
+Player.all.each do |player|
+    rand(1..5).times do
+        squad = Squad.all.sample
+        squad.add_or_remove_player(player) if !player.is_admin_of?(game)
     end
 end
