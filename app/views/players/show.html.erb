@@ -1,7 +1,6 @@
 <h1><%= @player.name %></h1>
 
-<h3>Upcoming Games</h3>
-
+<h3>My Upcoming Games</h3>
     <% @player.upcoming_games.each do |game|%>
             <div style="float: left; width: auto;">
                 <strong><%= "Admin: " if @player.is_admin_of?(game) %></strong>
@@ -9,4 +8,10 @@
             </div> 
             <%= player_admin_button(path: court_game_path(game.court, game), text: "Leave Game", params_hash: {player_id: current_player.id}) if @player == current_player %>
             <br>  
+    <% end %>
+
+<h3>My Squads</h3>
+    <% @player.squads.each do |squad|%>
+        <%= link_to squad.name, squad_path(squad) %>
+        <br>
     <% end %>
