@@ -25,7 +25,8 @@ class GamesController < ApplicationController
                 player = Player.find(params[:player_id])
                 game.add_or_remove_player(player)
             else
-                
+                player = Player.find(params[:admin_id])
+                game.make_admin(player)
             end
                 redirect_to court_game_path(game.court, game)
         else

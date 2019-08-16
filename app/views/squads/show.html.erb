@@ -1,18 +1,16 @@
-<h1><%= @game.court.name %></h1>
-<h3>Skill Level: <%= @game.skill_level %></h3>
-<h3><%= display_date_and_time(@game.time) %></h3>
+<h1><%= @squad.name %></h1>
 
 <h3>Players</h3>
-<% @game.players.each do |player|%>
+<% @squad.players.each do |player|%>
     <div style="float: left; width: auto;"> 
         <%= link_to player.name, player_path(player) %>
-        <%= " - ADMIN " if player.is_admin_of?(@game) %>
+        <%= " - ADMIN " if player.is_admin_of?(@squad) %>
     </div>
-        <% if current_player.is_admin_of?(@game) && player != current_player %>
+        <% if current_player.is_admin_of?(@squad) && player != current_player %>
             <div style="float: left; width: auto;"> 
-            <%=  player_admin_button(@game, "Remove Player", {player_id: player.id}) %>
+                <%=  player_admin_button(path: squad_path(@squad), text: "Remove Player", params_hash: {player_id: player.id}) %>
             </div>
-           <%=  player_admin_button(@game, "Add Admin", {admin_id: player.id}) %>
+            <%=  player_admin_button(path: squad_path(@squad), text: "Add Admin", params_hash: {admin_id: player.id}) %>
         <% else %>
             <br>
         <% end %>
@@ -20,5 +18,5 @@
 
 <% if current_player%>
     <br>
-    <%= player_admin_button(@game, @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", {player_id: current_player.id}) %>
+    <%= player_admin_button(path: squad_path(@squad), text: @squad.is_in_squad?(current_player) ? "Leave Squad" : "Join Squad", params_hash: {player_id: current_player.id}) %>
 <% end %>

@@ -1,7 +1,13 @@
 class SquadsController < ApplicationController
+    before_action :require_login
+
     def index
         @squads = Squad.all
         @new_squad = Squad.new
+    end
+
+    def show
+        @squad = Squad.find(params[:id])
     end
 
     def create
@@ -10,6 +16,23 @@ class SquadsController < ApplicationController
             redirect_to squad_path(squad)
         else
             render :index
+        end
+    end
+
+    def update
+        squad = Squad.find(params[:id])
+        if current_player.is_admin_of?(squad)
+            if params[:player_id]
+                player = Player.find(params[:player_id])
+                squad.add_or_remove_player(player)
+            else
+                player = Player.find(params[:admin_id])
+                squad.make_admin(player)
+            end
+                redirect_to squad_path(squad)
+        else
+            squad.add_or_remove_player(current_player)
+            redirect_to squad_path(squad)
         end
     end
 

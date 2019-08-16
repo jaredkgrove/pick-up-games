@@ -8,11 +8,11 @@
         <%= link_to player.name, player_path(player) %>
         <%= " - ADMIN " if player.is_admin_of?(@game) %>
     </div>
-        <% if current_player.is_admin_of?(@game) && player != current_player %>
+        <% if current_player.is_admin_of?(@game) && !player.is_admin_of?(@game) %>
             <div style="float: left; width: auto;"> 
-            <%=  player_admin_button(@game, "Remove Player", {player_id: player.id}) %>
+                <%=  player_admin_button(path: court_game_path(@game.court, @game), text: "Remove Player", params_hash: {player_id: player.id}) %>
             </div>
-           <%=  player_admin_button(@game, "Add Admin", {admin_id: player.id}) %>
+            <%=  player_admin_button(path: court_game_path(@game.court, @game), text: "Add Admin", params_hash: {admin_id: player.id}) %>
         <% else %>
             <br>
         <% end %>
@@ -20,5 +20,5 @@
 
 <% if current_player%>
     <br>
-    <%= player_admin_button(@game, @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", {player_id: current_player.id}) %>
+    <%= player_admin_button(path: court_game_path(@game.court, @game), text: @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", params_hash: {player_id: current_player.id}) %>
 <% end %>

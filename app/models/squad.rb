@@ -17,16 +17,17 @@ class Squad < ApplicationRecord
     end
 
     def add_player_as_admin(player)
-        self.add_player(player)
+        add_player(player)
         self.make_admin(player)
     end
 
     def add_or_remove_player(player)
         squad_player = self.squad_players.find_by(player:player)
         if squad_player
+            remove_admin(player) if player.is_admin_of?(self)
             squad_player.destroy
         else
-            self.player_count == 0 ? self.add_player_as_admin(player) : self.add_player(player)
+            self.player_count == 0 ? self.add_player_as_admin(player) : add_player(player)
         end
     end
 
@@ -36,7 +37,7 @@ class Squad < ApplicationRecord
 
     def remove_admin(player)
         self.game_players.find_by(player: player).update(admin: false)
-        self.make_all_admin if self.!has_admin?
+        self.make_all_admin if !self.has_admin?
     end
 
     def make_all_admin

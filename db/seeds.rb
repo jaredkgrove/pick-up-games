@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-parks_array = [
+courts_array = [
                 {name: "Jimmy's Backyard", location: "123 Street"},
                 {name: "Cool Park", location: "456 Road"},
                 {name: "North Commons", location: "234 Circle"},
@@ -27,12 +27,25 @@ parks_array = [
                 {name: "West Community Center", location: "987 Avenue"},
                 {name: "West High", location: "098 Street"}
             ] 
-parks_array.each do |park_hash|
-    Court.create(location:park_hash[:location], name: park_hash[:name])
+courts_array.each do |court_hash|
+    Court.create(location:court_hash[:location], name: court_hash[:name])
 end
 
 player_names = ["Jared", "Michael Jordan", "Timmy", "Steph Curry", "John", "Maya Moore", "Candace Parker", "Bethany", "Chelsea Gray"]
 
 player_names.each do |name|
-    Player.create(name:name, password:"password", email:"#{name.gsub(/\s+/, "")}@email.com")
+    player = Player.create(name:name, password:"password", email:"#{name.gsub(/\s+/, "")}@email.com")
+    court = Court.all.sample    
+end
+
+Player.all.each do |player|
+    court = Court.all.sample  
+    player.create_game_from_hash({court_id: court.id, time: rand(10.days).hours.from_now, skill_level: Game.skill_level_array.sample})
+end
+
+Player.all.each do |player|
+    rand(1..5).times do
+        game = Game.all.sample
+        game.add_or_remove_player(player) if !player.is_admin_of?(game)
+    end
 end
