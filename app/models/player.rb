@@ -7,6 +7,7 @@ class Player < ApplicationRecord
     has_many :favorites, dependent: :destroy
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
+    
     validates :name, presence: true
     validates :email, presence: true
     validates :email, uniqueness: true

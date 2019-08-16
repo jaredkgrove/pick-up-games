@@ -1,6 +1,6 @@
 <h1><%= @player.name %></h1>
 
-<h3>My Upcoming Games</h3>
+<h3>Upcoming Games</h3>
     <% @player.upcoming_games.each do |game|%>
             <div style="float: left; width: auto;">
                 <strong><%= "Admin: " if @player.is_admin_of?(game) %></strong>
@@ -10,8 +10,18 @@
             <br>  
     <% end %>
 
-<h3>My Squads</h3>
+<h3>Squads</h3>
     <% @player.squads.each do |squad|%>
-        <%= link_to squad.name, squad_path(squad) %>
-        <br>
+        <p>
+            <%= link_to squad.name, squad_path(squad) %>
+            (<%= squad.player_count %> players)
+        </p>
     <% end %>
+
+<h3>Favorite Courts</h3>
+<% @player.favorite_courts.each do |court|%>
+    <p>
+        <%= link_to court.name, court_path(court) %>
+        (<%= court.upcoming_games.count %> upcoming games)
+    </p>
+<% end%>

@@ -1,4 +1,4 @@
-<h1><%= @game.court.name %></h1>
+<h1><%= link_to @game.court_name, court_path(@game.court) %></h1>
 <h3>Skill Level: <%= @game.skill_level %></h3>
 <h3><%= display_date_and_time(@game.time) %></h3>
 
