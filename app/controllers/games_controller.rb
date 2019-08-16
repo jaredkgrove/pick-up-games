@@ -1,12 +1,13 @@
 class GamesController < ApplicationController
     before_action :require_login
+    before_action :game_must_be_upcoming, only: [:show, :update]
+
     def show
         @game = Game.find(params[:id])
         redirect_to court_game_path(@game.court, @game) if params[:court_id] != @game.court.id.to_s
     end
 
     def create
-        #require_login
         game = current_player.create_game_from_hash(game_params)
         @court = game.court
         if game.valid?
@@ -36,5 +37,10 @@ class GamesController < ApplicationController
     private
     def game_params
         params.require(:game).permit(:time, :court_id, :skill_level)
+    end
+
+    def game_must_be_upcoming
+        game = Game.find(params[:id])
+        redirect_to root_path if game.time < Time.zone.now
     end
 end

@@ -33,10 +33,10 @@ class Player < ApplicationRecord
         end
     end
 
-    def create_squad(name)
-        new_squad = self.squads.create(name: name)
-        new_squad.make_admin(self)
-        new_squad
+    def create_squad_from_hash(squad_hash)
+        self.squads.new(squad_hash) do |squad|
+            squad.make_admin(self) if squad.save
+        end
     end
 
     def add_favorite(court)
@@ -48,6 +48,6 @@ class Player < ApplicationRecord
     end
 
     def is_admin_of?(game_or_squad)
-        game_or_squad.admins.find_by(id: self.id)
+        !!game_or_squad.admins.find_by(id: self.id)
     end
 end

@@ -2,13 +2,13 @@
 
 #todo: 
 
-    - allow user to favorite and unfavorite a court
-    - display # of favorites on court show page
+    X allow user to favorite and unfavorite a court
+    X display # of favorites on court show page
     
 
-    - display next 10 games on welcome page
+    X display today's games on welcome page
 
-    - allow user to create squad
+    x allow user to create squad
     - allow user to join/leave squad
     - admin functionality
 

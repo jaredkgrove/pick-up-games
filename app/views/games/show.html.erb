@@ -1,6 +1,6 @@
 <h1><%= @game.court.name %></h1>
 <h3>Skill Level: <%= @game.skill_level %></h3>
-<h3><%= display_time(@game.time) %></h3>
+<h3><%= display_date_and_time(@game.time) %></h3>
 
 <h3>Players</h3>
 <% @game.players.each do |player|%>
@@ -13,8 +13,6 @@
             <%=  player_admin_button(@game, "Remove Player", {player_id: player.id}) %>
             </div>
            <%=  player_admin_button(@game, "Add Admin", {admin_id: player.id}) %>
-            <%# render partial: 'player_admin_button', locals: {game: @game, action_text: "Remove Player", action_hash: {player_id: player.id}} %>
-            <%# render partial: 'add_remove_player', locals: {game: @game, action_text: "Remove Player", action_hash: {player_id: player.id}} %>
         <% else %>
             <br>
         <% end %>
@@ -23,6 +21,4 @@
 <% if current_player%>
     <br>
     <%= player_admin_button(@game, @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", {player_id: current_player.id}) %>
-
-    <%# render partial: 'add_remove_player', locals: {game: @game, action_text: @game.is_in_game?(current_player) ? "Leave Game" : "Join Game", action_hash: {player_id: current_player.id}} %>
 <% end %>

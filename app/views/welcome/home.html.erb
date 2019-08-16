@@ -1,1 +1,9 @@
 <h1>Welcome to Pick-Up<%= ", #{current_player.name}" if current_player%>!</h1>
+
+
+<h3>Today's Games</h3>
+<ul>
+    <% Game.upcoming_today.each do |game|%>
+        <li><%= link_to "#{game.court_name} #{display_time(game.time)}, #{game.player_count} Players", court_game_path(game.court, game) %></li>
+    <% end %>
+</ul>

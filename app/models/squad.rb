@@ -4,6 +4,10 @@ class Squad < ApplicationRecord
     has_many :admins, -> { merge(SquadPlayer.admin) }, :source => :player, :through => :squad_players
     validates :name, presence: true
 
+    def is_in_squad?(player)
+        self.players.find_by(id: player.id)
+    end
+
     def player_count
         self.players.count
     end
@@ -13,36 +17,26 @@ class Squad < ApplicationRecord
     end
 
     def add_player_as_admin(player)
-        find_or_add_player(player)
-        make_admin(player)
-    end
-
-    def find_or_add_player(player)
-        self.squad_players.find_or_create_by(player:player)
+        self.add_player(player)
+        self.make_admin(player)
     end
 
     def add_or_remove_player(player)
         squad_player = self.squad_players.find_by(player:player)
         if squad_player
             squad_player.destroy
-            self.delete_team if self.players.empty?
         else
-            self.squad_players.create(player: player)
+            self.player_count == 0 ? self.add_player_as_admin(player) : self.add_player(player)
         end
     end
 
-    # def remove_player(player)
-    #     self.squad_players.find_by(player:player).destroy
-    #     self.delete_team if self.players.empty?
-    # end
-
     def make_admin(player)
-        self.squad_players.find_by(player: player).update(admin: true)        
+        self.squad_players.find_or_create_by(player: player).update(admin: true)        
     end
 
     def remove_admin(player)
-        self.squad_players.find_by(player: player).update(admin: false)
-        self.make_all_admin if !self.has_admin?
+        self.game_players.find_by(player: player).update(admin: false)
+        self.make_all_admin if self.!has_admin?
     end
 
     def make_all_admin
@@ -50,8 +44,18 @@ class Squad < ApplicationRecord
             make_admin(player)
         end
     end
+
+    def squad_name
+        self.squad.name
+    end
     
-    def delete_team
+    def delete_squad
         self.destroy
+    end
+
+    private
+    
+    def add_player(player)
+        self.squad_players.find_or_create_by(player:player)
     end
 end

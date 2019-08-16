@@ -5,9 +5,9 @@ class SquadsController < ApplicationController
     end
 
     def create
-        squad = current_player.create_team()
+        squad = current_player.create_squad_from_hash(squad_params)
         if squad.save
-            redirect_to squads_path
+            redirect_to squad_path(squad)
         else
             render :index
         end

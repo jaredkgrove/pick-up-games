@@ -9,6 +9,14 @@ class Court < ApplicationRecord
         self.games.where("time > ?", Time.zone.now).order(time: "ASC")
     end
 
+    def favorite_count
+        self.favorites.count
+    end
+
+    def is_favorite?(player)
+        !!self.favorites.find_by(player: player)
+    end
+
     def add_favorite(player)
         self.favorites.find_or_create_by(player:player)
     end

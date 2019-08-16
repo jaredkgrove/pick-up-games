@@ -12,6 +12,10 @@ class Game < ApplicationRecord
         ["Everyone Welcome", "Weekend Hustlers", "Offseason Reps", "Run the Court (Girls)", "Still Got It"]
     end
 
+    def self.upcoming_today
+        self.where(time: Time.zone.now..Time.zone.now.end_of_day).order(time: "ASC")
+    end
+
     def game_time_cannot_be_in_the_past
       if time.present? && time < Time.zone.now
         errors.add(:time, "can't be in the past")
@@ -32,11 +36,7 @@ class Game < ApplicationRecord
 
     def add_player_as_admin(player)
         self.add_player(player)
-        make_admin(player)
-    end
-
-    def add_player(player)
-        self.game_players.find_or_create_by(player:player)
+        self.make_admin(player)
     end
 
     def add_or_remove_player(player)
@@ -54,7 +54,7 @@ class Game < ApplicationRecord
 
     def remove_admin(player)
         self.game_players.find_by(player: player).update(admin: false)
-        make_all_admin if !has_admin?
+        self.make_all_admin if self.!has_admin?
     end
 
     def make_all_admin
@@ -62,8 +62,18 @@ class Game < ApplicationRecord
             make_admin(player)
         end
     end
+
+    def court_name
+        self.court.name
+    end
     
     def delete_game
         self.destroy
+    end
+
+    private
+    
+    def add_player(player)
+        self.game_players.find_or_create_by(player:player)
     end
 end
