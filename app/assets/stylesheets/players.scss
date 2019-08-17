@@ -1,13 +1,48 @@
 // Place all the styles related to the Players controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.sign-up fieldset ul {
-    text-decoration: none;
+.sign-up {
+    /*max-width: 26.875em;*/
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
 }
 
-.sign-up fieldset ul li {
-    display: block;
-    padding: 10px;
+.sign-up a {
+    text-decoration: none;
+    padding:5px  15px;
+    background:#3B5998; 
+    border:0 none;
+    border-radius: 5px; 
+    color: white;
 }
+
+.sign-up .new_player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.sign-up .new_player input{
+    margin:5px;
+}
+
+.sign-up .new_player input{
+    margin:5px;
+}
+
+.sign-up .new_player input[type="submit"]{
+    padding:5px  15px;
+    background:#ccc; 
+    border:0 none;
+    border-radius: 5px; 
+}
+/*
+.sign-up ul li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    float: left;
+}*/

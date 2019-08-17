@@ -28,7 +28,7 @@ header {
     right: 0;
     height: 80px;
     display: flex;
-    justify-content: center;
+    
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 0 25px 0 black;
