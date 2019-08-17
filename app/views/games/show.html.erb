@@ -8,14 +8,7 @@
         <%= link_to player.name, player_path(player) %>
         <%= " - ADMIN " if player.is_admin_of?(@game) %>
     </div>
-        <% if current_player.is_admin_of?(@game) && !player.is_admin_of?(@game) %>
-            <div style="float: left; width: auto;"> 
-                <%=  player_admin_button(path: court_game_path(@game.court, @game), text: "Remove Player", params_hash: {player_id: player.id}) %>
-            </div>
-            <%=  player_admin_button(path: court_game_path(@game.court, @game), text: "Add Admin", params_hash: {admin_id: player.id}) %>
-        <% else %>
-            <br>
-        <% end %>
+        <%= render "player_admin_buttons", game_or_squad: @game, player: player, path: court_game_path(@game.court, @game) %>
 <% end %>
 
 <% if current_player%>

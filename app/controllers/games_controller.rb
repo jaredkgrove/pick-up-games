@@ -21,7 +21,6 @@ class GamesController < ApplicationController
 
     def update
         game = Game.find(params[:id])
-        
         if params[:squad_id] 
             squad = Squad.find(params[:squad_id])
             game.add_squad_to_game(squad)
