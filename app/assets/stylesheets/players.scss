@@ -18,31 +18,20 @@
     color: white;
 }
 
-.sign-up .new_player {
+.sign-up form {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
 }
 
-.sign-up .new_player input{
+.sign-up form input{
     margin:5px;
 }
 
-.sign-up .new_player input{
-    margin:5px;
-}
-
-.sign-up .new_player input[type="submit"]{
+.sign-up form input[type="submit"]{
     padding:5px  15px;
     background:#ccc; 
     border:0 none;
     border-radius: 5px; 
 }
-/*
-.sign-up ul li {
-    display: block;
-    margin: 0;
-    padding: 0;
-    float: left;
-}*/

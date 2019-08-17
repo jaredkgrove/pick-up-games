@@ -4,14 +4,11 @@
   <p> <strong> Sign Up with your Email Address </strong></p>
         
   <%= form_for @player, url: '/players' do |f| %>
-
-        <%= f.text_field :email, placeholder: "Email" %> 
-        <%= f.text_field :name, placeholder: "Your Player Name" %> 
-        <%= f.password_field :password, placeholder: "Password" %> 
-       <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %> 
-    
-        <%= f.submit "Sign Up" %> 
-   
+    <%= f.text_field :email, placeholder: "Email" %> 
+    <%= f.text_field :name, placeholder: "Your Player Name" %> 
+    <%= f.password_field :password, placeholder: "Password" %> 
+    <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %> 
+    <%= f.submit "Sign Up" %> 
   <% end %>
        
   
