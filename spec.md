@@ -21,4 +21,4 @@ Confirm:
 - [x] The application is pretty DRY - I think so, there is always room for improvement, but I'm pretty happy with it
 - [x] Limited logic in controllers - Most logic is in controllers. My Update in the games_controller and squads_controller got a little fat. If I have time I will try to revisit that before the project review
 - [x] Views use helper methods if appropriate - I think so
-- [x] Views use partials if appropriate - I only used one partial and I don't even know if that was really necesssary with this iteraton of the app. I have one helper method (#player_admin_button) that I considered making a partial. I'm not sure what the right use would be.
+- [x] Views use partials if appropriate - _player_admin_buttons.html.erb
