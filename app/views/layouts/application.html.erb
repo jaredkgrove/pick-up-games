@@ -10,26 +10,28 @@
   </head>
 
   <body>
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <%= link_to "Home", root_url %>
-          <%= link_to 'Courts', courts_path %>
-          <%= link_to 'Squads', squads_path %>
+    <header>
+      <div>Pick Up Logo</div>
+      <nav>
+        <ul>
+          <li><%= link_to "Home", root_url %></li>
+          <li><%= link_to 'Courts', courts_path %></li>
+          <li><%= link_to 'Squads', squads_path %></li>
           <% if current_player %>
-            <%= link_to 'My Profile', player_path(current_player) %>
-            <%= link_to 'Log Out', logout_path, :method => :post %>
+            <li><%= link_to 'My Profile', player_path(current_player) %></li>
+            <li><%= link_to 'Log Out', logout_path, :method => :post %></li>
           <% else%>
-            <%= link_to "Sign Up", new_player_url %>
-            <%= link_to "Log In", login_url %>
+            <li><%= link_to "Sign Up", new_player_url %></li>
+            <li><%= link_to "Log In", login_url %></li>
           <% end %>
-        </div>
-      </div>
-    </div>
+        </ul>
+      </nav>
+    </header>
+
+ 
 
     <!-- content -->
-    <div class="container"  role="main">
-
+    <main>
         <% flash.each do |key, messages| %>
           <% messages.each do |message|%>
             <div class="alert alert-<%= key %>"><%= message %></div>
@@ -37,6 +39,6 @@
         <% end %>
         
       <%= yield %>
-    </div>
+    </main>
   </body>
 </html>
