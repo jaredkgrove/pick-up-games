@@ -1,22 +1,8 @@
-# pick-up-games
+# pick-up
 
-#todo: 
+## Usage
+To use this app, just clone, run rails db:migrate and then run rails s. Organize and join pick-up games of basketball at your favorite courts! -- (Courts and players are currently fictitious)
 
-    X allow user to favorite and unfavorite a court
-    X display # of favorites on court show page
-    
+## License
 
-    X display today's games on welcome page
-
-    x allow user to create squad
-    x allow user to join/leave squad
-    x admin functionality
-
-    x display squads on user show page
-    x display favorited courts on Player show page
-
-    x join by squad if admin of squad, all players are added to game
-
-    - Flash Messages for invalid game, squad, and player creation
-
-    Styling
+This is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
