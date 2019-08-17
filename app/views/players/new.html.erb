@@ -1,8 +1,14 @@
-<%= form_for @player, url: '/players' do |f| %>
-  Email: <%= f.text_field :email %> <br>
-  Player Name: <%= f.text_field :name %> <br>
-  Password: <%= f.password_field :password %> <br>
-  Password Confirmation: <%= f.password_field :password_confirmation %> <br>
-  <%= f.submit "Submit" %> <br>
-<% end %>
-<%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<div class="sign-up">
+  <%= form_for @player, url: '/players' do |f| %>
+  <fieldset>
+      <ul>
+        <li><%= f.text_field :email, placeholder: "Email" %> </li>
+        <li><%= f.text_field :name, placeholder: "Your Player Name" %> </li>
+        <li><%= f.password_field :password, placeholder: "Password" %> </li>
+        <li><%= f.password_field :password_confirmation, placeholder: "Confirm Password" %> </li>
+      </ul>
+    </fieldset>
+    <%= f.submit "Submit" %> <br>
+  <% end %>
+  <%= link_to('Sign up with Facebook!', '/auth/facebook') %>
+</div>
