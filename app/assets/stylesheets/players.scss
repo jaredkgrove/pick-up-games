@@ -1,6 +1,47 @@
 // Place all the styles related to the Players controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.profile {
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile .profile-box{
+    display: flex;
+
+    flex-direction: column;
+    width: 30vw;
+    background-color: lightgray;
+    border-radius: 5px; 
+}
+
+.profile .profile-box a{
+    text-decoration: none;
+    color: black;
+}
+
+.profile .profile-box div{
+    margin: 5px;
+}
+
+.profile .profile-box form{
+    display: inline;
+}
+
+.profile .profile-box input[type="submit"]{
+    padding: 1px  1px;
+    background: white; 
+    border:0 none;
+    border-radius: 5px; 
+    
+}
+
+.profile .profile-box h3{
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+}
+
 .sign-up {
     /*max-width: 26.875em;*/
     display: flex;
