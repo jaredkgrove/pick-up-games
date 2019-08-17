@@ -14,7 +14,6 @@
  *= require_self
  */
  body {
-    background-color: gainsboro;
     font-family: sans-serif;
     margin-top: 80px;
     padding: 20px;
@@ -22,7 +21,7 @@
 
 header {
     background-color: black;
-    color: azure;
+    color: white;
     position: fixed;
     top: 0;
     left: 0;
@@ -31,10 +30,17 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 25px 0 black;
 }
 
 header * {
+    /*margin-left: 40px;*/
     display: inline;
+}
+
+header div {
+    margin-left: 40px;
 }
 
 header li {
