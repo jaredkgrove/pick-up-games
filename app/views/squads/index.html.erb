@@ -1,7 +1,10 @@
 <h1>Join a Squad or create your own!</h1>
-
-<%= render "form", squad: @squad %>
-
-<% @squads.each do |squad| %>
-    <%= link_to "#{squad.name} (#{squad.player_count} members)", squad_path(squad) %> <br>
-<% end %>
+    <%= render "form", squad: @squad %>
+<div class="squads">
+    <% @squads.each do |squad| %>
+        <a class="content-box" href=<%= squad_path(squad)%>>
+            <h3><%= squad.name%></h3>
+             <%= squad.player_count.to_s + " members"  %>
+        </a>
+    <% end %>
+</div>

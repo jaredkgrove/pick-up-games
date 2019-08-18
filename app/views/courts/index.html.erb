@@ -2,11 +2,9 @@
 <div class="courts">
     <% @courts.each do |court| %>
         <a class="content-box" href=<%= court_path(court)%>>
-
-                <h3><%=court.name%></h3>
-                <%= court.location %> <br>
-                <%= court.upcoming_games.count.to_s + " upcoming games"%>
-
+            <h3><%=court.name%></h3>
+            <%= court.location %> <br>
+            <%= court.upcoming_games.count.to_s + " upcoming games"%>
         </a>
     <% end %>
 </div>

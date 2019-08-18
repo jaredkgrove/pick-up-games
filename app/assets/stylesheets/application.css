@@ -21,7 +21,6 @@
 
 .content-box{
     display: flex;
-
     flex-direction: column;
     width: 30vw;
     background-color: lightgray;

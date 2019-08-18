@@ -1,3 +1,26 @@
 // Place all the styles related to the Squads controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.squads {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.new_squad {
+    text-align: center;
+}
+
+.new_squad input[type="submit"]{
+    padding: 2px  2px;
+    background: orange; 
+    border:0 none;
+    border-radius: 5px; 
+}
+
+.squads .content-box{
+    text-decoration: none;
+    max-width: 15%;
+    margin: 1%;
+    text-align: center;
+}
