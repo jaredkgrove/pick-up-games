@@ -27,8 +27,10 @@ class Squad < ApplicationRecord
         if squad_player
             remove_admin(player) if player.is_admin_of?(self)
             squad_player.destroy
+            delete_squad if self.player_count == 0
+            
         else
-            self.player_count == 0 ? self.add_player_as_admin(player) : add_player(player)
+            add_player(player)
         end
     end
 
@@ -50,12 +52,11 @@ class Squad < ApplicationRecord
     def squad_name
         self.squad.name
     end
-    
+
+    private
     def delete_squad
         self.destroy
     end
-
-    private
     
     def add_player(player)
         self.squad_players.find_or_create_by(player:player)

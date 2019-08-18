@@ -32,10 +32,14 @@ class SquadsController < ApplicationController
                 player = Player.find(params[:admin_id])
                 squad.make_admin(player)
             end
-                redirect_to squad_path(squad)
         else
             squad.add_or_remove_player(current_player)
-            redirect_to squad_path(squad)
+        end
+        if Squad.find_by(id: squad.id)
+            redirect_to(squad_path(squad)) 
+        else
+            set_flash_succes("Squad #{squad.name} Deleted")
+            redirect_to(squads_path)
         end
     end
 
