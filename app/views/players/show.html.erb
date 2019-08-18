@@ -1,4 +1,4 @@
-    <h1><%= @player.name %></h1>
+    <h1><%= @player == current_player ? "My Profile" :  "#{@player.name}'s Profile"%></h1>
 <div class="profile">
     <div class="profile-box">
         <h3> Upcoming Games</h3>
