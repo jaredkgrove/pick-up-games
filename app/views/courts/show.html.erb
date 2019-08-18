@@ -1,10 +1,10 @@
 <h1><%= @court.name %></h1>
-<h3>Address: <%= @court.location %></h3>
+<h2>Address: <%= @court.location %></h2>
 <%= button_to (@court.is_favorite?(current_player) ? "Remove from Favorites" : "Add to Favorites"), court_path(@court), :method => :patch  %>
 
-<h3>Favorited By <%= @court.favorite_count %> Players</h3>
+<h2>Favorited By <%= @court.favorite_count %> Players</h2>
 
-<h3>Upcoming Games</h3>
+<h2>Upcoming Games</h2>
 <div class="games_list">
     <% @court.upcoming_games.each do |game|%>
         <%= link_to "#{display_date_and_time(game.time)} (#{game.player_count})", court_game_path(@court, game) %> <br>
@@ -12,7 +12,7 @@
 </div>
 
 <% if current_player %>
-    <h3>Create New Game</h3>
+    <h2>Create New Game</h2>
     <%= form_tag(court_games_path(@court)) do%>
         <%= hidden_field_tag "game[court_id]", @court.id %>
         Skill Level: <%= select_tag "game[skill_level]", options_for_select(Game.skill_level_array, Game.skill_level_array.first) %> <br>

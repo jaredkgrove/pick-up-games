@@ -29,13 +29,29 @@
     box-shadow: 0px 5px 25px 0 gray;
 }
 
+.content-box div{
+    margin: 5px;
+}
+
+.content-box form{
+    display: inline;
+}
+
+.content-box input[type="submit"]{
+    padding: 2px  2px;
+    background: orange; 
+    border:0 none;
+    border-radius: 5px; 
+    
+}
+
  .content-box a{
     text-decoration: none;
     color: black;
     
 }
 
-.content-box h3{
+.content-box h2{
     width: 100%;
     text-align: center;
     font-size: 30px;

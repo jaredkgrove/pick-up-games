@@ -1,9 +1,12 @@
 <h1>Courts</h1>
+<div class="courts">
+    <% @courts.each do |court| %>
+        <a class="content-box" href=<%= court_path(court)%>>
 
-<% @courts.each do |court| %>
-    <div class="park">
-        <%= link_to court.name, court_path(court) %>
-        Address: <%= court.location %>
-        Upcoming Games: <%= court.upcoming_games.count %>
-    </div>
-<% end %>
+                <h3><%=court.name%></h3>
+                <%= court.location %> <br>
+                <%= court.upcoming_games.count.to_s + " upcoming games"%>
+
+        </a>
+    <% end %>
+</div>

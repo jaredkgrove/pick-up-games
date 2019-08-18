@@ -1,7 +1,7 @@
-    <h1><%= @player == current_player ? "My Profile" :  "#{@player.name}'s Profile"%></h1>
+<h1><%= @player == current_player ? "My Profile" :  "#{@player.name}'s Profile"%></h1>
 <div class="profile">
     <div class="content-box">
-        <h3> Upcoming Games</h3>
+        <h2> Upcoming Games</h2>
         <% @player.upcoming_games.each do |game|%>
             <div>
                 <%= link_to display_date_and_time(game.time), court_game_path(game.court, game) %> 
@@ -13,7 +13,7 @@
     </div> 
 
     <div class="content-box">
-        <h3>Squads</h3>
+        <h2>Squads</h2>
         <% @player.squads.each do |squad|%>
             <div>
                 <%= link_to "#{squad.name} (#{squad.player_count} players)", squad_path(squad) %>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="content-box">
-        <h3>Favorite Courts</h3>
+        <h2>Favorite Courts</h2>
         <% @player.favorite_courts.each do |court|%>
             <div>
                 <%= link_to "#{court.name} (#{court.upcoming_games.count} games)", court_path(court) %>

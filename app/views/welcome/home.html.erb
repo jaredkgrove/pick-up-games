@@ -2,7 +2,7 @@
 
 <div class="welcome">
     <div class="content-box">
-        <h3>Today's Games</h3>
+        <h2>Today's Games</h2>
         <div>
             <% Game.upcoming_today.each do |game|%>
                 <%= link_to "#{display_time(game.time)} at #{game.court_name}", court_game_path(game.court, game) %> 
