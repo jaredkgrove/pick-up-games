@@ -8,6 +8,6 @@ module GamesHelper
     end
 
     def display_time(time)
-        time.strftime(" at %l:%m%P")
+        time.strftime("%l:%m%P")
     end
 end

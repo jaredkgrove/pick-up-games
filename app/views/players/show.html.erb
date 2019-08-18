@@ -1,6 +1,6 @@
     <h1><%= @player == current_player ? "My Profile" :  "#{@player.name}'s Profile"%></h1>
 <div class="profile">
-    <div class="profile-box">
+    <div class="content-box">
         <h3> Upcoming Games</h3>
         <% @player.upcoming_games.each do |game|%>
             <div>
@@ -12,7 +12,7 @@
         <% end %>
     </div> 
 
-    <div class="profile-box">
+    <div class="content-box">
         <h3>Squads</h3>
         <% @player.squads.each do |squad|%>
             <div>
@@ -22,7 +22,7 @@
         <% end %>
     </div>
 
-    <div class="profile-box">
+    <div class="content-box">
         <h3>Favorite Courts</h3>
         <% @player.favorite_courts.each do |court|%>
             <div>
