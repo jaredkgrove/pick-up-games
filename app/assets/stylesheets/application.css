@@ -66,6 +66,9 @@ a {
     text-decoration: none;
 }
 
+a {color: black;}         Unvisited link  */
+a:hover {color: darkgoldenrod;}   /* Mouse over link */
+
  body {
     font-family: sans-serif;
     margin-top: 80px;
