@@ -13,4 +13,40 @@
     max-width: 20%;
     margin: 1%;
     text-align: center;
+    
+}
+
+.court {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.court .favorite {
+    text-align: center;
+}
+
+.court .new-game{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.court input[type="submit"]{
+    padding: 5px  5px;
+    background: orange; 
+    border:0 none;
+    border-radius: 5px; 
+    min-width: 60px;
+    margin: 5px;
+}
+
+.court .favorite input[type="submit"]{
+    padding: 5px  5px;
+    background: orange; 
+    border:0 none;
+    border-radius: 5px; 
+    min-width: 60px;
+    margin: 5px;
 }

@@ -11,4 +11,4 @@
             <% end %>
         </div>
     </div>
-</div>
+    <%=  player_admin_button(path: squad_path(@squad), text: "JOIN SQUAD", params_hash: {player_id: current_player.id}) if !@squad.is_in_squad?(current_player) %>

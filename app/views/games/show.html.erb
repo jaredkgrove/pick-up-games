@@ -1,6 +1,7 @@
-<h1><%= link_to @game.court_name, court_path(@game.court) %></h1>
+<h1><%= display_date_and_time(@game.time) %></h1>
+<h2><%= link_to @game.court_name, court_path(@game.court) %></h2>
 <h2>Skill Level: <%= @game.skill_level %></h2>
-<h2><%= display_date_and_time(@game.time) %></h2>
+
 
 <h2>Players</h2>
 <% @game.players.each do |player|%>
