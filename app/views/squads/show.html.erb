@@ -1,15 +1,14 @@
 <h1><%= @squad.name %></h1>
-
-<h2>Players</h2>
-<% @squad.players.each do |player|%>
-    <div style="float: left; width: auto;"> 
-        <%= link_to player.name, player_path(player) %>
-        <%= " - ADMIN " if player.is_admin_of?(@squad) %>
+<div class="squad">
+   
+    <div class="content-box">
+        <h2>Players</h2>
+        <div>
+            <% @squad.players.each do |player|%>
+                    <%= link_to player.name, player_path(player) %>
+                    <%= " - ADMIN " if player.is_admin_of?(@squad) %>
+                    <%= render "games/player_admin_buttons", game_or_squad: @squad, player: player, path: squad_path(@squad) %> <br>
+            <% end %>
+        </div>
     </div>
-        <%= render "games/player_admin_buttons", game_or_squad: @squad, player: player, path: squad_path(@squad) %>
-<% end %>
-
-<% if current_player%>
-    <br>
-    <%= player_admin_button(path: squad_path(@squad), text: @squad.is_in_squad?(current_player) ? "Leave Squad" : "Join Squad", params_hash: {player_id: current_player.id}) %>
-<% end %>
+</div>
