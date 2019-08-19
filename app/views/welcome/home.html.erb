@@ -3,12 +3,12 @@
 <div class="welcome">
     <div class="content-box">
         <h2>Today's Games</h2>
-        <div>
             <% Game.upcoming_today.each do |game|%>
-                <%= player_admin_button(path: court_game_path(game.court, game), text: game.is_in_game?(current_player) ? "LEAVE" : "JOIN" , params_hash: {player_id: current_player.id}) if current_player  %>
-                <%= link_to "#{display_time(game.time)} at #{game.court_name}", court_game_path(game.court, game) %> 
-                <%= "(#{game.player_count} players)" %> <br>
+                <div>
+                    <%= player_admin_button(path: court_game_path(game.court, game), text: game.is_in_game?(current_player) ? "LEAVE" : "JOIN" , params_hash: {player_id: current_player.id}) if current_player  %>
+                    <%= link_to "#{display_time(game.time)} at #{game.court_name}", court_game_path(game.court, game) %> 
+                    <%= "(#{game.player_count} players)" %> 
+                </div>
             <% end %>
-        </div>
     </div>
 </div>

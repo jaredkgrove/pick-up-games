@@ -1,6 +1,6 @@
 <% if current_player.is_admin_of?(game_or_squad) && (!player.is_admin_of?(game_or_squad) || player == current_player) %>
-        <%=  player_admin_button(path: path, text: player == current_player ? "LEAVE SQUAD" : "REMOVE PLAYER", params_hash: {player_id: player.id}) %>
+        <%=  player_admin_button(path: path, text: player == current_player ? "LEAVE" : "REMOVE PLAYER", params_hash: {player_id: player.id}) %>
         <%=  player_admin_button(path: path, text: "MAKE ADMIN", params_hash: {admin_id: player.id}) if player != current_player%> 
 <% elsif player == current_player%>
-            <%=  player_admin_button(path: path, text: "LEAVE SQUAD", params_hash: {player_id: current_player.id}) %>
+            <%=  player_admin_button(path: path, text: "LEAVE", params_hash: {player_id: current_player.id}) %>
 <% end %>
