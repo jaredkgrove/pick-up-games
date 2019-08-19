@@ -41,13 +41,13 @@
     background: orange; 
     border:0 none;
     border-radius: 5px; 
-    
+    min-width: 60px;
+    margin: 5px;
 }
 
  .content-box a{
     text-decoration: none;
     color: black;
-    
 }
 
 .content-box h2{

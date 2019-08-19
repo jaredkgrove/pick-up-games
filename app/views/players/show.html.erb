@@ -4,10 +4,10 @@
         <h2> Upcoming Games</h2>
         <% @player.upcoming_games.each do |game|%>
             <div>
+                <strong><%= link_to game.court_name, court_path(game.court) %></strong> <br>
+                <%= player_admin_button(path: court_game_path(game.court, game), text: "Leave Game", params_hash: {player_id: current_player.id}) if @player == current_player %> 
                 <%= link_to display_date_and_time(game.time), court_game_path(game.court, game) %> 
                 <strong><%= " Admin" if @player.is_admin_of?(game) %></strong> 
-                 <%= player_admin_button(path: court_game_path(game.court, game), text: "Leave Game", params_hash: {player_id: current_player.id}) if @player == current_player %> <br>
-                <%= link_to game.court_name, court_path(game.court) %> 
             </div>
         <% end %>
     </div> 
