@@ -42,7 +42,6 @@ class GamesController < ApplicationController
             set_flash_succes("Game Deleted")
             redirect_to court_path(game.court)
         end
-        
     end
 
     private

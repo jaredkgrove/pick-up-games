@@ -21,6 +21,10 @@ class Player < ApplicationRecord
         end
     end
 
+    def admin_squads_count
+        self.admin_squads.count
+    end
+
     def upcoming_games
         self.games.where("time > ?", Time.zone.now).order(time: "ASC")
     end

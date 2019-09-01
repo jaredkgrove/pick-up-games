@@ -44,9 +44,15 @@ adjectives_array =["cool", "bad", "old", "awesome", "neat-o", "purple", "cheatin
 Player.all.each do |player|
     court = Court.all.sample  
     3.times do
-        player.create_game_from_hash({court_id: court.id, time: rand(4.days).seconds.from_now, skill_level: Game.skill_level_array.sample})
+        game = player.games.build({court_id: court.id, time: rand(4.days).seconds.from_now, skill_level: Game.skill_level_array.sample})
+        if game.save
+            game.make_admin(player)
+        end
     end
-    player.create_squad_from_hash({name: "#{adjectives_array.sample} #{squad_names_array.sample}"})
+    squad = player.squads.build({name: "#{adjectives_array.sample} #{squad_names_array.sample}"})
+    if squad.save
+        squad.make_admin(player)
+    end
 end
 
 Player.all.each do |player|

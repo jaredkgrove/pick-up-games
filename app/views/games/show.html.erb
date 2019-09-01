@@ -15,10 +15,11 @@
     </div>
     
     <%=  player_admin_button(path: court_game_path(@game.court, @game), text: "JOIN", params_hash: {player_id: current_player.id}) if !@game.is_in_game?(current_player) %>
-    <div>or</div>
-    <%= form_tag(court_game_path(@game.court, @game), :method => "PATCH", :class => "add-squad") do%>
-        <%= submit_tag "ADD YOUR SQUAD" %> 
-        <%= select_tag "squad_id", options_from_collection_for_select(current_player.admin_squads, :id, :name) %>
-    <% end%>
-
+    <% if current_player.admin_squads_count > 0%>
+        <div>or</div>
+        <%= form_tag(court_game_path(@game.court, @game), :method => "PATCH", :class => "add-squad") do%>
+            <%= submit_tag "ADD YOUR SQUAD" %> 
+            <%= select_tag "squad_id", options_from_collection_for_select(current_player.admin_squads, :id, :name) %>
+        <% end%>
+    <% end %>
 </div>
