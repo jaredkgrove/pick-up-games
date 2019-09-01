@@ -15,8 +15,9 @@ class SquadsController < ApplicationController
     # end
 
     def create
-        @squad = current_player.create_squad_from_hash(squad_params)
+        @squad = current_player.squads.build(squad_params)#current_player.create_squad_from_hash(squad_params)
         if @squad.save
+            @squad.make_admin(current_player)
             set_flash_succes("Squad Successfully Created!")
             redirect_to squad_path(@squad)
         else

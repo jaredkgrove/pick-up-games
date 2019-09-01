@@ -8,9 +8,10 @@ class GamesController < ApplicationController
     end
 
     def create
-        @game = current_player.create_game_from_hash(game_params)
+        @game = current_player.games.build(game_params)
         @court = @game.court
-        if @game.valid?
+        if @game.save
+            @game.make_admin(current_player)
             set_flash_succes("Game Successfully Created!")
             redirect_to court_game_path(@court, @game)
         else
@@ -35,7 +36,13 @@ class GamesController < ApplicationController
         else
             game.add_or_remove_player(current_player)
         end
-        redirect_to court_game_path(game.court, game)
+        if Game.find_by(id: game.id)
+            redirect_to court_game_path(game.court, game)
+        else
+            set_flash_succes("Game Deleted")
+            redirect_to court_path(game.court)
+        end
+        
     end
 
     private

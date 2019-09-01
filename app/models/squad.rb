@@ -4,6 +4,7 @@ class Squad < ApplicationRecord
     has_many :admins, -> { merge(SquadPlayer.admin) }, :source => :player, :through => :squad_players
     validates :name, presence: true
     validates :name, uniqueness: true
+    
     #scope :popular_squads, -> {joins(:squad_players).group(:id).order(Arel.sql 'COUNT(squad_id) DESC').limit(3)}
 
     def is_in_squad?(player)
@@ -29,7 +30,6 @@ class Squad < ApplicationRecord
             remove_admin(player) if player.is_admin_of?(self)
             squad_player.destroy
             delete_squad if self.player_count == 0
-            
         else
             add_player(player)
         end

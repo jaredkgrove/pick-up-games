@@ -29,17 +29,17 @@ class Player < ApplicationRecord
         game.add_player(self)
     end
 
-    def create_game_from_hash(game_hash)
-        self.games.new(game_hash).tap do |game|
-            game.make_admin(self) if game.save
-        end
-    end
+    # def create_game_from_hash(game_hash)
+    #     self.games.new(game_hash).tap do |game|
+    #         game.make_admin(self) if game.save
+    #     end
+    # end
 
-    def create_squad_from_hash(squad_hash)
-        self.squads.new(squad_hash) do |squad|
-            squad.make_admin(self) if squad.save
-        end
-    end
+    # def create_squad_from_hash(squad_hash)
+    #     self.squads.build(squad_hash) #do |squad|
+    #         #squad.make_admin(self) if squad.save
+    #     #end
+    # end
 
     def add_favorite(court)
         self.favorites.find_or_create_by(court:court)

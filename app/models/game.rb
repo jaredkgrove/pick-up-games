@@ -51,6 +51,7 @@ class Game < ApplicationRecord
         if game_player
             remove_admin(player) if player.is_admin_of?(self)
             game_player.destroy
+            delete_game if self.player_count == 0
         else
             self.player_count == 0 ? self.add_player_as_admin(player) : add_player(player)
         end
