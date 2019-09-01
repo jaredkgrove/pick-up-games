@@ -12,7 +12,7 @@ class Player < ApplicationRecord
     validates :name, presence: true
     validates :email, presence: true
     validates :email, uniqueness: true
-    validates :password, presence: true
+    validates :password, presence: true, on: [:create]
 
     def self.find_or_create_by_omniauth_hash(auth_hash)
         self.where(email: auth_hash[:info][:email]).first_or_create do |player|

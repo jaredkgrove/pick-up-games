@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :players, only: [:show, :new, :create, :edit, :update] 
 
-  get '/popular_squads' => 'squads#popular'
+  #get '/popular_squads' => 'squads#popular'
 
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'

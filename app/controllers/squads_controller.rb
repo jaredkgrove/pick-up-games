@@ -10,9 +10,9 @@ class SquadsController < ApplicationController
         @squad = Squad.find(params[:id])
     end
 
-    def popular
-        @popular_squads = Squad.popular_squads
-    end
+    # def popular
+    #     @popular_squads = Squad.popular_squads
+    # end
 
     def create
         @squad = current_player.create_squad_from_hash(squad_params)
