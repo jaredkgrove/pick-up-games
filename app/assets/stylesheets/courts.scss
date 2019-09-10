@@ -1,14 +1,14 @@
 // Place all the styles related to the Courts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.courts {
+.courts.index .courts-list{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
 
-.courts .content-box{
+.courts.index .content-box{
     text-decoration: none;
     max-width: 20%;
     margin: 1%;
@@ -16,23 +16,23 @@
     
 }
 
-.court {
+.courts.show .court-info{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.court .favorite {
+.courts.show .court-info .favorite {
     text-align: center;
 }
 
-.court .new-game{
+.courts.show .court-info .new-game{
    display: flex;
    flex-direction: column;
    align-items: center;
 }
 
-.court input[type="submit"]{
+.courts.show .court-info input[type="submit"]{
     padding: 5px  5px;
     background: orange; 
     border:0 none;
@@ -41,7 +41,7 @@
     margin: 5px;
 }
 
-.court .favorite input[type="submit"]{
+.courts.show .court-info .favorite input[type="submit"]{
     padding: 5px  5px;
     background: orange; 
     border:0 none;

@@ -1,5 +1,5 @@
 <h1><%= @court.name %></h1>
-<div class="court">
+<div class="court-info">
     <h3>Address: <%= @court.location %></h3>
     <div class="favorite">
         <%= button_to (@court.is_favorite?(current_player) ? "REMOVE FROM FAVORITES" : "ADD TO FAVORITES"), court_path(@court), :method => :patch  %>

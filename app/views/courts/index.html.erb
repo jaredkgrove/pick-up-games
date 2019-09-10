@@ -1,5 +1,5 @@
 <h1>Courts</h1>
-<div class="courts">
+<div class="courts-list">
     <% @courts.each do |court| %>
         <a class="content-box" href=<%= court_path(court)%>>
             <h3><%=court.name%></h3>

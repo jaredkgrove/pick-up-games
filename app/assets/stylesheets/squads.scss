@@ -4,17 +4,23 @@
 
 
 
-.squads {
+.squads.index .squads-list {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.squad {
+.squads.show {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+// .squads.show .content-box{
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+// }
 
 
 
@@ -29,14 +35,14 @@
     border-radius: 5px;
 }
 
-.squads .content-box{
+.squads.index .content-box{
     text-decoration: none;
     max-width: 15%;
     margin: 1%;
     text-align: center;
 }
 
-.squad input[type="submit"]{
+.squads.show input[type="submit"]{
     padding: 5px  5px;
     background: orange; 
     border:0 none;
