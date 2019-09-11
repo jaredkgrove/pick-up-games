@@ -5,6 +5,8 @@ class Player < ApplicationRecord
     has_many :admin_squads, -> {merge(SquadPlayer.admin)}, :source => :squad, through: :squad_players
     has_many :game_players, dependent: :destroy
     has_many :games, through: :game_players
+    has_many :upcoming_games, -> {where("time > ?", Time.zone.now).order(time: "ASC")}, :source => :game, through: :game_players
+
     has_many :favorites, dependent: :destroy
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
@@ -13,6 +15,11 @@ class Player < ApplicationRecord
     validates :email, presence: true
     validates :email, uniqueness: true
     validates :password, presence: true, on: [:create]
+ 
+
+    # def upcoming_games
+    #     self.games.where("time > ?", Time.zone.now).order(time: "ASC")
+    # end
 
     def self.find_or_create_by_omniauth_hash(auth_hash)
         self.where(email: auth_hash[:info][:email]).first_or_create do |player|
@@ -23,10 +30,6 @@ class Player < ApplicationRecord
 
     def admin_squads_count
         self.admin_squads.count
-    end
-
-    def upcoming_games
-        self.games.where("time > ?", Time.zone.now).order(time: "ASC")
     end
 
     def join_game(game)

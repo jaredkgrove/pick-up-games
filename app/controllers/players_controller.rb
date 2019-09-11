@@ -3,7 +3,7 @@ class PlayersController < ApplicationController
         @player = Player.find(params[:id])
         respond_to do |format|
             format.html { render :show }
-            format.json { render json: @player, include: [:squads, :games] }
+            format.json { render json: @player, include: [:squads, :upcoming_games] }
         end
     end
 
