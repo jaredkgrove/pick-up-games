@@ -1,6 +1,10 @@
 class PlayersController < ApplicationController
     def show
         @player = Player.find(params[:id])
+        respond_to do |format|
+            format.html { render :show }
+            format.json { render json: @player, include: [:squads, :games] }
+        end
     end
 
     def new

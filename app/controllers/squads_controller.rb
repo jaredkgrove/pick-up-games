@@ -4,6 +4,7 @@ class SquadsController < ApplicationController
     def index
         @squads = Squad.all
         @squad = Squad.new
+        render :index
     end
 
     def show

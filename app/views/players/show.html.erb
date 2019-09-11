@@ -1,7 +1,8 @@
-<h1><%= @player == current_player ? "My Profile" :  "#{@player.name}'s Profile"%></h1>
+<h1 user-id=<%= @player.id %>><%= @player == current_player ? "My Profile" :  "#{@player.name}'s Profile"%></h1>
 <div class="profile">
-    <div class="content-box">
+    <div class="content-box .js-player-games">
         <h2> Upcoming Games</h2>
+        <!--
         <% @player.upcoming_games.each do |game|%>
             <div>
                 <strong><%= link_to game.court_name, court_path(game.court) %></strong> <br>
@@ -10,16 +11,19 @@
                 <strong><%= " Admin" if @player.is_admin_of?(game) %></strong> 
             </div>
         <% end %>
+        -->
     </div> 
 
-    <div class="content-box">
+    <div class="content-box js-player-squads">
         <h2>Squads</h2>
+        <!--
         <% @player.squads.each do |squad|%>
             <div>
                 <%= link_to "#{squad.name} (#{squad.player_count} players)", squad_path(squad) %>
                 <strong><%= " Admin" if @player.is_admin_of?(squad) %></strong>
             </div>
         <% end %>
+        -->
     </div>
 
     <div class="content-box">
