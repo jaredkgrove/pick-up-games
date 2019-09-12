@@ -24,32 +24,32 @@ class Player {
     }
 }
 
-class PlayerSquad {
-    constructor(json) {
-        this.id = json["id"]
-        this.name = json["attributes"]["name"];
-        this.player_count = json["attributes"]["player-count"];
-        this.link = json["links"]["self"]
-    }
+// class PlayerSquad {
+//     constructor(json) {
+//         this.id = json["id"]
+//         this.name = json["attributes"]["name"];
+//         this.player_count = json["attributes"]["player-count"];
+//         this.link = json["links"]["self"]
+//     }
 
-    createElement(){
-        let squadDiv = document.createElement('div')
-        let squadATag = document.createElement('a')
+//     createElement(){
+//         let squadDiv = document.createElement('div')
+//         let squadATag = document.createElement('a')
 
-        squadATag.href = this.link
-        squadATag.innerText = `${this.name} (${this.player_count} members)`
+//         squadATag.href = this.link
+//         squadATag.innerText = `${this.name} (${this.player_count} members)`
 
-        squadDiv.appendChild(squadATag)
+//         squadDiv.appendChild(squadATag)
 
-        if(activePlayerProfile.isAdminOfSquad(this.id)){
-            let strongAdminTag = document.createElement('STRONG')
-            strongAdminTag.textContent = " Admin"
-            squadDiv.appendChild(strongAdminTag)
-        }
+//         if(activePlayerProfile.isAdminOfSquad(this.id)){
+//             let strongAdminTag = document.createElement('STRONG')
+//             strongAdminTag.textContent = " Admin"
+//             squadDiv.appendChild(strongAdminTag)
+//         }
 
-        return squadDiv
-    }
-}
+//         return squadDiv
+//     }
+// }
 
 class PlayerGame {
     constructor(json) {
@@ -60,12 +60,7 @@ class PlayerGame {
         this.court_link = json["links"]["court"]
         
     }
-        /* <div>
-                <strong><a href="/courts/1">Jimmy's Backyard</a></strong> <br>
-                <form class="button_to" method="post" action="/courts/1/games/61"><input type="hidden" name="_method" value="patch"><input type="submit" value="LEAVE"><input type="hidden" name="authenticity_token" value="TQpu0cY36kjM1bM+Nh5dqWiKxOjDPu2Cs672Batm/mk/BMjR7KZFivEcZNC1CxFG+3hZM0b0SV2YEORnxIherA=="><input type="hidden" name="player_id" value="21"></form> 
-                <a href="/courts/1/games/61">Wednesday, September 25 at  8:09pm</a> 
-                <strong> Admin</strong> 
-            </div> */
+
     createElement(){
         let gameDiv = document.createElement('div')
         let courtATag = document.createElement('a')
@@ -87,12 +82,46 @@ class PlayerGame {
         gameATag.href = this.link
         gameATag.innerText = this.time_text
         //squadATag.innerText = `${this.name} (${this.player_count} members)`
-        let strongTag = document.createElement('STRONG')
+        let strongTag = document.createElement('h4')
         strongTag.appendChild(courtATag)
         
         gameDiv.appendChild(strongTag)
+       let form = document.createElement('form')
+       form.setAttribute("class", "button_to")
+       form.setAttribute("method", "post")
+       form.setAttribute("action", this.link)
+        
+       let hiddenInput = document.createElement('input')
+       hiddenInput.setAttribute("type", "hidden")
+       hiddenInput.setAttribute("name", "_method")
+       hiddenInput.setAttribute("value", "patch")
+
+       let submitInput = document.createElement('input')
+       submitInput.setAttribute("type", "submit")
+       submitInput.setAttribute("value", "LEAVE")
+
+       let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+
+       let tokenInput = document.createElement('input')
+       tokenInput.setAttribute("type", "hidden")
+       tokenInput.setAttribute("name", "authenticity_token")
+       tokenInput.setAttribute("value", token)
+
+       let playerInput = document.createElement('input')
+       playerInput.setAttribute("type", "hidden")
+       playerInput.setAttribute("name", "player_id")
+       playerInput.setAttribute("value", activePlayerProfile.id)
+
+       form.appendChild(hiddenInput)
+       form.appendChild(submitInput)
+       form.appendChild(tokenInput)
+       form.appendChild(playerInput)
+
+       gameDiv.appendChild(form)
+
         gameDiv.appendChild(gameATag)
 
+        //alert(document.getElementsByName('csrf-token')[0].getAttribute('content'))
         // if(activePlayerProfile.isAdminOfSquad(this.id)){
         //     squadDiv.innerHTML += "<strong> Admin </strong>"
         // }
@@ -114,11 +143,12 @@ function fetchActiveProfilePlayerData(){
 
 function populatePlayerProfile(json){
     json["included"].forEach(function(resourceJson){
-        if(resourceJson["type"] === "squads"){
-            let squad = new PlayerSquad(resourceJson)
-            let squadElement = squad.createElement()
-            document.querySelector(".js-player-squads").appendChild(squadElement)
-        }else if(resourceJson["type"] === "games"){
+        // if(resourceJson["type"] === "squads"){
+        //     let squad = new PlayerSquad(resourceJson)
+        //     let squadElement = squad.createElement()
+        //     document.querySelector(".js-player-squads").appendChild(squadElement)
+        // }else if(resourceJson["type"] === "games"){
+        if(resourceJson["type"] === "games"){
             let game = new PlayerGame(resourceJson)
             let gameElement = game.createElement()
             document.querySelector(".js-player-games").appendChild(gameElement)

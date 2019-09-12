@@ -11,19 +11,20 @@
                 <strong><%= " Admin" if @player.is_admin_of?(game) %></strong> 
             </div>
         <% end %>
+        
         -->
     </div> 
 
     <div class="content-box js-player-squads">
         <h2>Squads</h2>
-        <!--
+        
         <% @player.squads.each do |squad|%>
             <div>
                 <%= link_to "#{squad.name} (#{squad.player_count} players)", squad_path(squad) %>
                 <strong><%= " Admin" if @player.is_admin_of?(squad) %></strong>
             </div>
         <% end %>
-        -->
+        
     </div>
 
     <div class="content-box">
