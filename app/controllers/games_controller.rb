@@ -8,16 +8,23 @@ class GamesController < ApplicationController
     end
 
     def create
+
         @game = current_player.games.build(game_params)
         @court = @game.court
+        
         if @game.save
             @game.make_admin(current_player)
             set_flash_succes("Game Successfully Created!")
-            redirect_to court_game_path(@court, @game)
+            respond_to do |format|
+               format.html { redirect_to court_game_path(@court, @game) }
+               format.json { render json: @court, serializer: CompleteCourtSerializer, include: [:upcoming_games], status: 201}
+            end
         else
             set_flash_errors(@game)
-            render "courts/show"
+            render json: @court, serializer: CompleteCourtSerializer, include: [:upcoming_games]
         end
+
+        #render json: @court, serializer: CompleteCourtSerializer, include: [:upcoming_games]
     end
 
     def update
