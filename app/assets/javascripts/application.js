@@ -22,6 +22,20 @@ window.onload = function(){
         e.preventDefault()
         fetchCourts()
     })
+    //if(!currentUser){
+        // fetchCurrentUser()
+    //}
+}
+
+function fetchCurrentUser(){
+    // fetch(`/current_user.json`)
+    // .then(response => response.json())
+    // .then((json) => {
+    //     const CompleteCourt = createCompleteCourt()
+    //     court = new CompleteCourt(json)
+    // }
+    // );
+    // currentUser = new Player()
 }
 
 function emptyMain(){

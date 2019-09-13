@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   end
 
   resources :players, only: [:show, :new, :create, :edit, :update] 
-
+  get '/current_user' => 'players#current'
   #get '/popular_squads' => 'squads#popular'
 
   get '/login' => 'sessions#new'

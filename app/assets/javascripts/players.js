@@ -5,24 +5,24 @@
 //         fetchActiveProfilePlayerData() 
 //     }
 // }
+//let currentUser
+class Player {
+    constructor(json) { 
+        this.id = json["data"]["id"]
+        this.name = json["data"]["attributes"]["name"]
+        this.adminSquadsJson = json["data"]["relationships"]["admin-squads"]["data"]
+    }
 
-// class Player {
-//     constructor(json) { 
-//         this.id = json["data"]["id"]
-//         this.name = json["data"]["attributes"]["name"]
-//         this.adminSquadsJson = json["data"]["relationships"]["admin-squads"]["data"]
-//     }
-
-//     isAdminOfSquad(squadId){
-//         let admin = false
-//         for(let adminSquad of this.adminSquadsJson){
-//             if(adminSquad["id"] === squadId){
-//                 admin = true
-//             }
-//         }
-//         return admin
-//     }
-// }
+    isAdminOfSquad(squadId){
+        let admin = false
+        for(let adminSquad of this.adminSquadsJson){
+            if(adminSquad["id"] === squadId){
+                admin = true
+            }
+        }
+        return admin
+    }
+}
 
 // // class PlayerSquad {
 // //     constructor(json) {
