@@ -15,7 +15,8 @@
       <nav>
         <ul>
           <li><%= link_to "Home", root_url %></li>
-          <li><%= link_to 'Courts', courts_path %></li>
+          <!--<li><%= link_to 'Courts', courts_path %></li>-->
+          <li><a href="#" id="js-courts"> Courts </a></li>
           <li><%= link_to 'Squads', squads_path %></li>
           <% if current_player %>
             <li><%= link_to 'My Profile', player_path(current_player) %></li>

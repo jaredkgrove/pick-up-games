@@ -57,6 +57,15 @@ class Game < ApplicationRecord
         end
     end
 
+    # def remove_player(player)
+    #     game_player = self.game_players.find_by(player:player)
+    #     if game_player
+    #         remove_admin(player) if player.is_admin_of?(self)
+    #         game_player.destroy
+    #         delete_game if self.player_count == 0
+    #     end
+    # end
+
     def make_admin(player)
         self.game_players.find_or_create_by(player: player).update(admin: true)        
     end

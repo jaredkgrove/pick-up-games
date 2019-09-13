@@ -26,12 +26,13 @@ class GamesController < ApplicationController
             squad = Squad.find(params[:squad_id])
             game.add_squad_to_game(squad)
         elsif current_player.is_admin_of?(game)
+            #change logic to prevent admin from being able to remove other admin or add players not already in game
             if params[:player_id]
                 player = Player.find(params[:player_id])
-                game.add_or_remove_player(player)
+                game.add_or_remove_player(player) if game.is_in_game?(player)
             elsif params[:admin_id]
                 player = Player.find(params[:admin_id])
-                game.make_admin(player) 
+                game.make_admin(player) if game.is_in_game?(player) & !player.is_admin_of?(game)
             end
         else
             game.add_or_remove_player(current_player)

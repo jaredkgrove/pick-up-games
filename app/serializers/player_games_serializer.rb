@@ -7,6 +7,7 @@ class PlayerGamesSerializer < ActiveModel::Serializer
   #   link(:related) { court_path(object.court) }
   #   Serializer = GameCourtSerializer
   # end
+  
   def time_text
     display_date_and_time(object.time)
   end
