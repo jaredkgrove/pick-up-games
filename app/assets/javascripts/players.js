@@ -45,7 +45,11 @@ class Player {
 
     inInGame(gameId){
         return this.upcomingGameIds.includes(gameId.toString())
-    }    
+    }
+    
+    isFavoriteCourt(courtId){
+        return this.favoriteCourtIds.includes(courtId.toString())
+    }   
 }
 
 // // class PlayerSquad {
