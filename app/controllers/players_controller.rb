@@ -1,10 +1,10 @@
 class PlayersController < ApplicationController
-
+    before_action :require_login, only:[:current]
     def current
-        @player = current_player
+        @player = current_player ? current_player : Player.new
         respond_to do |format|
             format.html { render :show }
-            format.json { render json: @player, include: [:squads, :upcoming_games] }
+            format.json { render json: @player}
         end
     end
 

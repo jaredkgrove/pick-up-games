@@ -16,26 +16,31 @@
 //= require activestorage
 
 //= require_tree .
-
+let currentUser
 window.onload = function(){
     document.getElementById("js-courts").addEventListener('click', function(e){
         e.preventDefault()
         fetchCourts()
     })
-    //if(!currentUser){
-        // fetchCurrentUser()
-    //}
+    fetchCurrentUser()
 }
 
 function fetchCurrentUser(){
-    // fetch(`/current_user.json`)
-    // .then(response => response.json())
-    // .then((json) => {
-    //     const CompleteCourt = createCompleteCourt()
-    //     court = new CompleteCourt(json)
-    // }
-    // );
-    // currentUser = new Player()
+    fetch(`/current_user.json`)
+    .then((response) => {
+        
+        if (!response.ok) {
+            throw Error(response.statusText);
+        }
+        return response.json()
+    })
+    .then((json) => {
+        currentUser = new Player(json["data"])
+    }
+    ).catch(function(error) {
+        console.log(`User not logged in. Error Message: ${error}`);
+    });
+    
 }
 
 function emptyMain(){

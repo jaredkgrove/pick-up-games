@@ -5,23 +5,47 @@
 //         fetchActiveProfilePlayerData() 
 //     }
 // }
-//let currentUser
+
 class Player {
     constructor(json) { 
-        this.id = json["data"]["id"]
-        this.name = json["data"]["attributes"]["name"]
-        this.adminSquadsJson = json["data"]["relationships"]["admin-squads"]["data"]
+        this.id = json["id"]
+        this.name = json["attributes"]["name"]
+        this.email = ["attributes"]["email"]
+        this.squadIds = []
+        this.upcomingGameIds = []
+        this.adminSquadIds = []
+        this.adminUpcomingGameIds = []
+        this.favoriteCourtIds = []
+        this.buildAssociationArrays(json["relationships"])
+    }
+
+    buildAssociationArrays(relationshipJson){
+        for (let squadData of relationshipJson["squads"]["data"]) { this.squadIds.push(squadData["id"]) }
+
+        for (let adminSquadData of relationshipJson["admin-squads"]["data"]) { this.adminSquadIds.push(adminSquadData["id"]) }
+
+        for (let upcomingGameData of relationshipJson["upcoming-games"]["data"]) { this.upcomingGameIds.push(upcomingGameData["id"]) }
+
+        for (let adminUpcomingGameData of relationshipJson["admin-games"]["data"]) { this.adminUpcomingGameIds.push(adminUpcomingGameData["id"]) }
+
+        for (let favoriteCourtData of relationshipJson["favorite-courts"]["data"]) { this.favoriteCourtIds.push(favoriteCourtData["id"]) }
     }
 
     isAdminOfSquad(squadId){
-        let admin = false
-        for(let adminSquad of this.adminSquadsJson){
-            if(adminSquad["id"] === squadId){
-                admin = true
-            }
-        }
-        return admin
+        return this.adminSquadIds.includes(squadId.toString())
     }
+
+    isInSquad(squadId){
+        return this.squadIds.includes(squadId.toString())
+    }
+
+    isAdminOfGame(gameId){
+        return this.adminUpcomingGameIds.includes(gameId.toString())
+    }
+
+    inInGame(gameId){
+        return this.upcomingGameIds.includes(gameId.toString())
+    }    
 }
 
 // // class PlayerSquad {

@@ -5,8 +5,9 @@ class Player < ApplicationRecord
     has_many :admin_squads, -> {merge(SquadPlayer.admin)}, :source => :squad, through: :squad_players
     has_many :game_players, dependent: :destroy
     has_many :games, through: :game_players
+    
     has_many :upcoming_games, -> {where("time > ?", Time.zone.now).order(time: "ASC")}, :source => :game, through: :game_players
-
+    has_many :admin_games, -> {merge(GamePlayer.admin).where("time > ?", Time.zone.now).order(time: "ASC")}, :source => :game, through: :game_players
     has_many :favorites, dependent: :destroy
     has_many :courts, through: :games
     has_many :favorite_courts, through: :favorites, source: :court
