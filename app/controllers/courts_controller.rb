@@ -1,5 +1,5 @@
 class CourtsController < ApplicationController
-    before_action :require_login, only:[:update]
+    before_action :require_login, only:[:update, :show]
     def index
         @courts = Court.all
         respond_to do |format|

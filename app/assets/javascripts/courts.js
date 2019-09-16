@@ -23,7 +23,7 @@ function createSimpleCourt(){
             this.addCourtWrapper()
         }
 
-        addCourtWrapper(){
+        addCourtWrapper = () => {
             let wrapper = createLink({class: "content-box js-court", href: "#", court_id: this.id})
             let courtNameTag = createElement('h3',{}, this.name)
             wrapper.appendChild(courtNameTag)
@@ -32,7 +32,7 @@ function createSimpleCourt(){
             courtsWrapper.appendChild(wrapper)
         }
 
-        addClickListener(elem){
+        addClickListener = (elem) => {
             elem.addEventListener('click', function(e){
                 e.preventDefault()
                 fetchCourt(elem.getAttribute('court_id'))
@@ -57,7 +57,7 @@ function createCompleteCourt(){
             this.addListenerToNewGameForm()
         }
 
-        addListenerToNewGameForm(){
+        addListenerToNewGameForm = () => {
             let newGameForm = document.querySelector('.new-game')
             newGameForm.addEventListener('submit',function(e){
                 e.preventDefault()
@@ -109,11 +109,8 @@ function createCompleteCourt(){
                         <input type="datetime-local" name="time" id="game_time" value="2019-09-13T14:57"> <br>
                         <input type="submit" name="commit" value="Create Game" data-disable-with="Create Game">
                     </form>
-                </div>
-            `
+                </div>`
         }
-
-
     }
 }
 
@@ -166,13 +163,21 @@ function fetchCreateGame(path, game_data){
         const CompleteCourt = createCompleteCourt()
         court = new CompleteCourt(json)
     }).catch(function(error) {
+
         console.log(error)
     })
 }
 
 function fetchCourt(id){
-    fetch(`/courts/${id}.json`)
-    .then(response => response.json())
+    fetch(`/courts/${id}.json`, {redirect: 'follow'})
+    .then( (response) => {
+        let isRedirected = response.redirected
+        if(isRedirected){
+            window.location.href = response.url;
+        }else{
+            return response.json()
+        }
+    })
     .then((json) => {
         const CompleteCourt = createCompleteCourt()
         court = new CompleteCourt(json)

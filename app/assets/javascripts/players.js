@@ -1,11 +1,3 @@
-// let activePlayerProfile
-
-// window.onload = function(){
-//     if(document.querySelector(".players.show")){
-//         fetchActiveProfilePlayerData() 
-//     }
-// }
-
 class Player {
     constructor(json) { 
         this.id = json["id"]
@@ -51,6 +43,14 @@ class Player {
         return this.favoriteCourtIds.includes(courtId.toString())
     }   
 }
+
+// let activePlayerProfile
+
+// window.onload = function(){
+//     if(document.querySelector(".players.show")){
+//         fetchActiveProfilePlayerData() 
+//     }
+// }
 
 // // class PlayerSquad {
 // //     constructor(json) {
