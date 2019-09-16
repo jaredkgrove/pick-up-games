@@ -6,7 +6,7 @@ function createSimpleCourt(){
         main.innerHTML = `
             <h1> Courts </h1>
             <div class='courts-list'></div>
-        `
+        ` // Court index template
     }
 
     initializeCourtsIndexView()
@@ -24,7 +24,7 @@ function createSimpleCourt(){
         }
 
         addCourtWrapper = () => {
-            let wrapper = createLink({class: "content-box js-court", href: "#", court_id: this.id})
+            let wrapper = createElement('a', {class: "content-box js-court", href: "#", court_id: this.id})
             let courtNameTag = createElement('h3',{}, this.name)
             wrapper.appendChild(courtNameTag)
             wrapper.innerHTML += `${this.location} <br> ${this.upcoming_game_count} upcoming games`
@@ -130,6 +130,7 @@ function createCourtUpcomingGame(){
         addGameElement = () => {
             let gameTag = createElement('a', {href: `${this.path}`}, `${this.timeText} (${this.playerCount})\n`)
             gameList.appendChild(gameTag)
+            gameList.appendChild(createElement('br'))
         }
     }
 }
@@ -160,10 +161,10 @@ function fetchCreateGame(path, game_data){
         }
         return res.json()
     }).then(function(json) {
-        const CompleteCourt = createCompleteCourt()
-        court = new CompleteCourt(json)
+        newGameJson = json["included"].slice(-1)[0]
+        const UpcomingGame =  createCourtUpcomingGame()
+        new UpcomingGame(newGameJson)
     }).catch(function(error) {
-
         console.log(error)
     })
 }

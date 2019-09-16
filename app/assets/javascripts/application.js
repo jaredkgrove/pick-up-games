@@ -28,7 +28,6 @@ window.onload = function(){
 function fetchCurrentUser(){
     fetch(`/current_user.json`)
     .then((response) => {
-        
         if (!response.ok) {
             throw Error(response.statusText);
         }
@@ -41,12 +40,6 @@ function fetchCurrentUser(){
         console.log(`User not logged in. Error Message: ${error}`);
     });
     
-}
-
-function emptyMain(){
-    let main = document.querySelector('main')
-    main.innerHTML = ''
-    return main    
 }
 
 function setBodyClass(className){
@@ -63,18 +56,24 @@ function createElement(type = 'div', attributes = {}, text = ''){
     return elem
 }
 
-function createLink(attributes){
-    let a = document.createElement('a')
-    for(let attr in attributes) {
-        a.setAttribute(attr, attributes[attr])
-    }
-    return a
-}
+// function emptyMain(){
+//     let main = document.querySelector('main')
+//     main.innerHTML = ''
+//     return main    
+// }
 
-function createDiv(attributes){
-    let div = document.createElement('div')
-    for(let attr in attributes) {
-        div.setAttribute(attr, attributes[attr])
-    }
-    return div
-}
+// function createLink(attributes){
+//     let a = document.createElement('a')
+//     for(let attr in attributes) {
+//         a.setAttribute(attr, attributes[attr])
+//     }
+//     return a
+// }
+
+// function createDiv(attributes){
+//     let div = document.createElement('div')
+//     for(let attr in attributes) {
+//         div.setAttribute(attr, attributes[attr])
+//     }
+//     return div
+// }
