@@ -55,14 +55,23 @@ function createCompleteCourt(){
                 this.addCourtUpcomingGames(json["included"])
             }
             this.addListenerToNewGameForm()
+            this.addListenerToFavoriteButton()
         }
 
         addListenerToNewGameForm = () => {
             let newGameForm = document.querySelector('.new-game')
-            newGameForm.addEventListener('submit',function(e){
+            newGameForm.addEventListener('submit', (e) => {
                 e.preventDefault()
                 fetchCreateGame(newGameForm.getAttribute('action'), newGameFormToJSON(newGameForm))
              })
+        }
+
+        addListenerToFavoriteButton = () => {
+            let favoriteButton = document.querySelector('.add-remove-favorite')
+            favoriteButton.addEventListener('submit', (e) => {
+                e.preventDefault()
+                fetchCreateFavorite(favoriteButton.getAttribute('action'), newFavoriteFormToJSON(favoriteButton))
+            })
         }
 
         addCourtUpcomingGames = (gamesArray) => {
@@ -81,7 +90,7 @@ function createCompleteCourt(){
                 <div class="court-info">
                     <h3 id='js-court-location'>${this.location}</h3>
                     <div class="favorite">
-                        <form class="button_to" method="post" action="/courts/${this.id}">
+                        <form class="button_to add-remove-favorite" method="post" action="/courts/${this.id}">
                             <input type="hidden" name="_method" value="patch">
                             <input type="submit" value="${currentUser.isFavoriteCourt(this.id) ? "REMOVE FROM FAVORITES" : "ADD TO FAVORITES"}">
                             <input type="hidden" name="authenticity_token" value="${token}">
@@ -120,7 +129,7 @@ function createCourtUpcomingGame(){
     return class {
         constructor(json) {
             this.id = json["id"]
-            this.name = json["attributes"]["name"]
+            //this.name = json["attributes"]["name"]
             this.timeText = json["attributes"]["time-text"]
             this.playerCount = json["attributes"]["player-count"]
             this.path = json["links"]["self"]
@@ -135,6 +144,13 @@ function createCourtUpcomingGame(){
     }
 }
 
+const newFavoriteFormToJSON = elements => [].reduce.call(elements, (data, element) => {
+    // if(element.name === 'authenticity_token' || element.name === 'utf8' || element.name === 'commit'){
+    data[element.name] = element.value;
+    return data;
+  
+  }, {});
+
 
 const newGameFormToJSON = elements => [].reduce.call(elements, (data, element) => {
     if(element.name === 'authenticity_token' || element.name === 'utf8' || element.name === 'commit'){
@@ -145,6 +161,30 @@ const newGameFormToJSON = elements => [].reduce.call(elements, (data, element) =
     return data;
   
   }, {"game":{}});
+
+  function fetchCreateFavorite(path, fake_data){
+    fetch(`${path}.json`,
+    {
+        method: 'PATCH',
+        body: JSON.stringify(fake_data),
+        headers: {
+            //'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
+    ).then((res) => {
+        if (!res.ok) {
+            throw Error(res.statusText);
+        }
+        return res.json()
+    }).then(function(json) {
+        currentUser.addOrRemoveFavoriteCourt(json["data"]["id"])
+        const CompleteCourt = createCompleteCourt()
+        court = new CompleteCourt(json)
+    }).catch(function(error) {
+        console.log(error)
+    })
+}
 
 function fetchCreateGame(path, game_data){
     fetch(`${path}.json`,
@@ -161,9 +201,14 @@ function fetchCreateGame(path, game_data){
         }
         return res.json()
     }).then(function(json) {
-        newGameJson = json["included"].slice(-1)[0]
-        const UpcomingGame =  createCourtUpcomingGame()
-        new UpcomingGame(newGameJson)
+        if(json["data"]["type"] === "games"){
+             const UpcomingGame =  createCourtUpcomingGame()
+             new UpcomingGame(json["data"])
+         }else{
+             alert("Game must be in the future")
+            const CompleteCourt = createCompleteCourt()
+            court = new CompleteCourt(json)
+         }
     }).catch(function(error) {
         console.log(error)
     })

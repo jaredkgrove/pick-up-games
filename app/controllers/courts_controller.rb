@@ -19,6 +19,9 @@ class CourtsController < ApplicationController
     def update
         @court = Court.find(params[:id])
         @court.add_or_remove_favorite(current_player)
-        redirect_to court_path(@court)
+        respond_to do |format|
+            format.html {redirect_to court_path(@court)}
+            format.json {render json: @court, serializer: CompleteCourtSerializer, include: [:upcoming_games]}
+        end
     end
 end

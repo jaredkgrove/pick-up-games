@@ -17,7 +17,7 @@ class GamesController < ApplicationController
             set_flash_succes("Game Successfully Created!")
             respond_to do |format|
                format.html { redirect_to court_game_path(@court, @game) }
-               format.json { render json: @court, serializer: CompleteCourtSerializer, include: [:upcoming_games], status: 201}
+               format.json { render json: @game, serializer: SimpleGameSerializer, status: 201}#, include: [:upcoming_games], status: 201}
             end
         else
             set_flash_errors(@game)

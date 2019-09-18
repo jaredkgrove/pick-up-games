@@ -42,6 +42,16 @@ class Player {
     isFavoriteCourt(courtId){
         return this.favoriteCourtIds.includes(courtId.toString())
     }   
+
+    addOrRemoveFavoriteCourt(courtId){
+        //if(this.favoriteCourtIds.includes(courtId.toString())){
+        let index = this.favoriteCourtIds.indexOf(courtId.toString());
+        if (index > -1) {
+            this.favoriteCourtIds.splice(index, 1);
+        }else {
+            this.favoriteCourtIds.push(courtId)
+        }
+    } 
 }
 
 // let activePlayerProfile
