@@ -4,12 +4,23 @@ function createSimpleCourt(){
         setBodyClass("courts index")
         let main = document.querySelector('main')
         main.innerHTML = `
+            <button class="js-sort-courts">Sort Courts!</button>
             <h1> Courts </h1>
             <div class='courts-list'></div>
         ` // Court index template
     }
+    const addListenerToSortButton = () => {
+        let sortButton = document.querySelector(".js-sort-courts")
+        sortButton.addEventListener('click', function(e){
+            e.preventDefault()
+            fetchSortedCourts()
+        })
+    }
 
     initializeCourtsIndexView()
+    addListenerToSortButton()
+
+
 
     let courtsWrapper = document.querySelectorAll('.courts-list')[0]
 
@@ -21,7 +32,10 @@ function createSimpleCourt(){
             this.upcoming_game_count = json["attributes"]["upcoming-game-count"] 
             this.path = json["links"]["self"]
             this.addCourtWrapper()
+            
         }
+
+
 
         addCourtWrapper = () => {
             let wrapper = createElement('a', {class: "content-box js-court", href: "#", court_id: this.id})
@@ -119,6 +133,7 @@ function createCompleteCourt(){
                         <input type="submit" name="commit" value="Create Game" data-disable-with="Create Game">
                     </form>
                 </div>`
+                
         }
     }
 }
@@ -229,6 +244,50 @@ function fetchCourt(id){
         court = new CompleteCourt(json)
     }
     );
+}
+
+// items.sort(function(a, b) {
+//     var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+//     var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+//     if (nameA < nameB) {
+//       return -1;
+//     }
+//     if (nameA > nameB) {
+//       return 1;
+//     }
+  
+//     // names must be equal
+//     return 0;
+//   });
+
+function fetchSortedCourts(){
+    fetch(`/courts.json`)
+    .then(response => response.json())
+    .then((json) => {
+        const SimpleCourt = createSimpleCourt()
+        let courtData = json["data"]
+        courtData.sort(function(a, b) {
+            var nameA = a["attributes"]["name"].toUpperCase(); // ignore upper and lowercase
+            var nameB = b["attributes"]["name"].toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+    
+            return 0;
+          })
+          courtData.forEach(function(courtJson){
+            court = new SimpleCourt(courtJson)
+          })
+        })
+            
+        // json["data"].forEach(function(courtJson){
+        //     court = new SimpleCourt(courtJson)
+        // })
+  
+
 }
 
 function fetchCourts(){
